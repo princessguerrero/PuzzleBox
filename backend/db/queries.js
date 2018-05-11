@@ -8,7 +8,7 @@ function registerUser(req, res, next) {
   const hash = authHelpers.createHash(req.body.password);
   db
     .none(
-      "INSERT INTO users (username, email, password_digest) VALUES (${username}, ${email}, ${password})",
+      "INSERT INTO users_main (username, email, password_digest) VALUES (${username}, ${email}, ${password})",
       {
         username: req.body.username,
         email: req.body.email,
@@ -24,6 +24,7 @@ function registerUser(req, res, next) {
     });
 }
 
+// add main user bio
 // register a user child
 
 // get user
