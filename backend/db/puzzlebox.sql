@@ -7,10 +7,12 @@ DROP TABLE IF EXISTS users_main, authorized_users, user_child, contacts, contact
 
 CREATE TABLE users_main (
   id SERIAL PRIMARY KEY,
+  first_name VARCHAR NOT NULL,
+  last_name VARCHAR NOT NULL,
+  relationship VARCHAR NOT NULL,
   username VARCHAR NOT NULL UNIQUE,
-  password_digest VARCHAR NOT NULL,
   email VARCHAR NOT NULL UNIQUE,
-  relationship VARCHAR NOT NULL
+  password_digest VARCHAR NOT NULL,
 );
 
 CREATE TABLE user_child (
@@ -74,7 +76,7 @@ CREATE TABLE services_notes (
 );
 
 INSERT INTO users_main (username, password_digest, email, relationship)
-  VALUES ('prinsesa', '$2a$10$f17jjX0NASQWYOln23Ogk.ePXm0TpAs2oq.k4.YOGQGTnkOvZlD/O', 'princess@princess.com', 'mother');
+  VALUES ('Princess', 'Guerrero', 'mother', 'prinsesa', 'princess@princess.com', '$2a$10$f17jjX0NASQWYOln23Ogk.ePXm0TpAs2oq.k4.YOGQGTnkOvZlD/O');
 
 INSERT INTO user_child (first_name, last_name, admin_id, date_of_birth, age, pic, school, grade, class_size, diagnosis, likes, dislikes)
   VALUES ('Philippe', 'Guerrero', 1, 'July 21, 2010', '12', 'photo', 'P4Q@Skillman', '7th', '6-1-1', 'Autism', 'iPad, running', 'loud noises, fireworks');
