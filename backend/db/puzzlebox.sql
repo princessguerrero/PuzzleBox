@@ -12,7 +12,7 @@ CREATE TABLE users_main (
   relationship VARCHAR NOT NULL,
   username VARCHAR NOT NULL UNIQUE,
   email VARCHAR NOT NULL UNIQUE,
-  password_digest VARCHAR NOT NULL,
+  password_digest VARCHAR NOT NULL
 );
 
 CREATE TABLE user_child (
@@ -75,7 +75,7 @@ CREATE TABLE services_notes (
   timestamp VARCHAR NOT NULL
 );
 
-INSERT INTO users_main (username, password_digest, email, relationship)
+INSERT INTO users_main (first_name, last_name, relationship, username, email, password_digest)
   VALUES ('Princess', 'Guerrero', 'mother', 'prinsesa', 'princess@princess.com', '$2a$10$f17jjX0NASQWYOln23Ogk.ePXm0TpAs2oq.k4.YOGQGTnkOvZlD/O');
 
 INSERT INTO user_child (first_name, last_name, admin_id, date_of_birth, age, pic, school, grade, class_size, diagnosis, likes, dislikes)
