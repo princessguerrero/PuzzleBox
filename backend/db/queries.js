@@ -48,15 +48,15 @@ function mainUserBio(req, res, next) {
     });
 }
 
-// register a user child
-function registerUserChild(req, res, next) {
+// add a user child
+function addUserChild(req, res, next) {
   db
     .none(
       "INSERT INTO user_child (first_name, last_name, admin_id, date_of_birth, age, pic, school, grade, class_size, diagnosis, likes, dislikes) VALUES (DEFAULT, ${first_name}, ${last_name}, ${admin_id}, ${date_of_birth}, ${age}, ${pic}, ${school}, ${grade}, ${class_size}, ${diagnosis}, ${likes}, ${dislikes})",
       {
         first_name: req.body.username,
         last_name: req.body.last_name,
-        admin_id: req.user_main.id,
+        admin_id: req.user.id,
         date_of_birth: req.body.date_of_birth,
         age: req.body.age,
         pic: req.body.pic,
@@ -77,11 +77,33 @@ function registerUserChild(req, res, next) {
     });
 }
 
+// add authorized user
+function addAuthorizedUser(req, res, next) {
+    db
+      .none(
+        "INSERT INTO authorized_users (first_name, last_name, email, relationship) VALUES (DEFAULT, ${first_name}, ${last_name}, ${email}, ${relationship})",
+        {
+          first_name: req.body.username,
+          last_name: req.body.last_name,
+          email: req.body.email,
+          relationship: req.body.relationship
+        }
+      )
+      .then(() => {
+        res.status(200).send("added authorized user into database");
+      })
+      .catch(err => {
+        console.log(`error adding authorized user: `, err);
+        // res.status(500).send("error adding user attributes: ", err);
+      });
+  }
+
+
 // get main user
 function getMainUser(req, res, next) {
   db
     .one("SELECT username, email FROM users_main WHERE username=${username}", {
-      username: req.user_main.username
+      username: req.user.username
     })
     .then(data => {
       res.status(200).json({ user: data });
@@ -90,7 +112,7 @@ function getMainUser(req, res, next) {
 
 // get all authorized users
 function getAuthorizedUsers(req, res, next) {
-    db.any("SELECT id, auth_user_firstname, auth_user_lastname, email, relationship FROM authorized_users")
+    db.any("SELECT id, auth_user_firstname, auth_user_lastname, email, relationship FROM authorized_users WHERE admin_id=${admin_id}")
     .then(data => {
       console.log("data:", data);
       res.status(200).json({
@@ -107,7 +129,7 @@ function getAuthorizedUsers(req, res, next) {
 // get a user's child
 function getUserChild(req, res, next) {
     db.one("SELECT first_name, last_name FROM user_child WHERE admin_id=${admin_id}", {
-        admin_id: req.user_child.admin_id
+        admin_id: req.user.admin_id
     })
     .then(data => {
         res.status(200).json({ user: data });
@@ -126,7 +148,8 @@ function logoutUser(req, res, next) {
 module.exports = {
   registerUser,
   mainUserBio,
-  registerUserChild,
+  addUserChild,
+  addAuthorizedUser,
   getMainUser,
   getAuthorizedUsers,
   getUserChild,
