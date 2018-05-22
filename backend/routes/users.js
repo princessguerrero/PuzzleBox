@@ -5,11 +5,14 @@ const { loginRequired } = require("../auth/helpers");
 const passport = require("../auth/local");
 
 /* GET routes. */
-router.get("/", db.getMainUser);
-router.get("/getUserChild", db.getUserChild);
-router.get("/getAuthorizedUsers", db.getAuthorizedUsers);
+router.get("/", db.getAllMainUsers);
+router.get("/getMainUser", loginRequired, db.getMainUser);
+router.get("/getUserChild", loginRequired, db.getUserChild);
+router.get("/getAllAuthorizedUsers", loginRequired, db.getAllAuthorizedUsers);
+router.get("/getAllChildren", loginRequired, db.getAllChildren);
 
 // POST routes
+router.post("/mainUserBio", db.mainUserBio);
 router.post("/addChildInfo", db.addUserChild);
 router.post("/addAuthUser", db.addAuthorizedUser);
 
@@ -34,5 +37,6 @@ router.post("/login", passport.authenticate("local"), (req, res) => {
     username: req.user.username
   });
 });
+
 router.get("/logout", loginRequired, db.logoutUser);
 module.exports = router;

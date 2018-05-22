@@ -1,10 +1,11 @@
-const pgp = require("pg-promise")({});
-const db = pgp("postgres://localhost/puzzlebox");
+const db = require("./index");
 const authHelpers = require("../auth/helpers");
 const passport = require("../auth/local");
 
 // add a new user to the database
 function registerUser(req, res, next) {
+  console.log("req.body", req.body);
+  console.log("registerUser");
   const hash = authHelpers.createHash(req.body.password);
   db
     .none(
@@ -16,7 +17,7 @@ function registerUser(req, res, next) {
       }
     )
     .then(() => {
-      return next();
+      res.status(200).send("registered user into database");
     })
     .catch(err => {
       // ***** ADD if/else statements for different errors *****
@@ -28,9 +29,9 @@ function registerUser(req, res, next) {
 function mainUserBio(req, res, next) {
   db
     .none(
-      "INSERT INTO users_main_bio (first_name, last_name, relationship, pic, current_goals, next_steps, notes) VALUES (DEFAULT, ${first_name}, ${last_name}, ${relationship}, ${pic}, ${current_goals}, ${next_steps}, ${notes})",
+      "INSERT INTO users_main_bio (first_name, last_name, relationship, pic, current_goals, next_steps, notes) VALUES (${first_name}, ${last_name}, ${relationship}, ${pic}, ${current_goals}, ${next_steps}, ${notes})",
       {
-        first_name: req.body.username,
+        first_name: req.body.first_name,
         last_name: req.body.last_name,
         relationship: req.body.relationship,
         pic: req.body.pic,
@@ -52,11 +53,10 @@ function mainUserBio(req, res, next) {
 function addUserChild(req, res, next) {
   db
     .none(
-      "INSERT INTO user_child (first_name, last_name, admin_id, date_of_birth, age, pic, school, grade, class_size, diagnosis, likes, dislikes) VALUES (DEFAULT, ${first_name}, ${last_name}, ${admin_id}, ${date_of_birth}, ${age}, ${pic}, ${school}, ${grade}, ${class_size}, ${diagnosis}, ${likes}, ${dislikes})",
+      "INSERT INTO user_child (first_name, last_name, date_of_birth, age, pic, school, grade, class_size, diagnosis, likes, dislikes) VALUES (${first_name}, ${last_name}, ${date_of_birth}, ${age}, ${pic}, ${school}, ${grade}, ${class_size}, ${diagnosis}, ${likes}, ${dislikes})",
       {
-        first_name: req.body.username,
+        first_name: req.body.first_name,
         last_name: req.body.last_name,
-        admin_id: req.user.id,
         date_of_birth: req.body.date_of_birth,
         age: req.body.age,
         pic: req.body.pic,
@@ -79,25 +79,27 @@ function addUserChild(req, res, next) {
 
 // add authorized user
 function addAuthorizedUser(req, res, next) {
-    db
-      .none(
-        "INSERT INTO authorized_users (first_name, last_name, email, relationship) VALUES (DEFAULT, ${first_name}, ${last_name}, ${email}, ${relationship})",
-        {
-          first_name: req.body.username,
-          last_name: req.body.last_name,
-          email: req.body.email,
-          relationship: req.body.relationship
-        }
-      )
-      .then(() => {
-        res.status(200).send("added authorized user into database");
-      })
-      .catch(err => {
-        console.log(`error adding authorized user: `, err);
-        // res.status(500).send("error adding user attributes: ", err);
-      });
-  }
-
+  db
+    .none(
+      "INSERT INTO authorized_users (auth_user_firstname, auth_user_lastname, email, relationship, admin_username, user_child_firstname, user_child_lastname ) VALUES (${auth_user_firstname}, ${auth_user_lastname}, ${email}, ${relationship}, ${admin_username}, ${user_child_firstname}, ${user_child_lastname})",
+      {
+        auth_user_firstname: req.body.auth_user_firstname,
+        auth_user_lastname: req.body.auth_user_lastname,
+        email: req.body.email,
+        relationship: req.body.relationship,
+        admin_username: req.body.admin_username,
+        user_child_firstname: req.body.user_child_firstname,
+        user_child_lastname: req.body.user_child_lastname
+      }
+    )
+    .then(() => {
+      res.status(200).send("added authorized user into database");
+    })
+    .catch(err => {
+      console.log(`error adding authorized user: `, err);
+      // res.status(500).send("error adding user attributes: ", err);
+    });
+}
 
 // get main user
 function getMainUser(req, res, next) {
@@ -110,9 +112,29 @@ function getMainUser(req, res, next) {
     });
 }
 
+// get all main users
+function getAllMainUsers(req, res, next) {
+  db
+    .any("SELECT id, username, email FROM users_main")
+    .then(data => {
+      console.log("data:", data);
+      res.status(200).json({
+        status: "success",
+        data: data,
+        message: "Retrieved all main users"
+      });
+    })
+    .catch(err => {
+      return next(err);
+    });
+}
+
 // get all authorized users
-function getAuthorizedUsers(req, res, next) {
-    db.any("SELECT id, auth_user_firstname, auth_user_lastname, email, relationship FROM authorized_users WHERE admin_id=${admin_id}")
+function getAllAuthorizedUsers(req, res, next) {
+  db
+    .any(
+      "SELECT id, auth_user_firstname, auth_user_lastname, email, relationship FROM authorized_users WHERE admin_username=${admin_username}"
+    )
     .then(data => {
       console.log("data:", data);
       res.status(200).json({
@@ -126,16 +148,39 @@ function getAuthorizedUsers(req, res, next) {
     });
 }
 
-// get a user's child
+// get a users' child
 function getUserChild(req, res, next) {
-    db.one("SELECT first_name, last_name FROM user_child WHERE admin_id=${admin_id}", {
-        admin_id: req.user.admin_id
-    })
+  db
+    .one(
+      "SELECT first_name, last_name FROM user_child WHERE admin_username=${admin_username}",
+      {
+        admin_username: req.user.username
+      }
+    )
     .then(data => {
-        res.status(200).json({ user: data });
+      res.status(200).json({ user: data });
     });
 }
 
+// get all users' children
+function getAllChildren(req, res, next) {
+    db
+      .any("SELECT first_name, last_name FROM user_child WHERE admin_username=${admin_username}",
+    {
+        admin_username: req.user.username
+    })
+      .then(data => {
+        console.log("data:", data);
+        res.status(200).json({
+          status: "success",
+          data: data,
+          message: "Retrieved all users children"
+        });
+      })
+      .catch(err => {
+        return next(err);
+      });
+  }
 
 // Log out user
 function logoutUser(req, res, next) {
@@ -151,7 +196,9 @@ module.exports = {
   addUserChild,
   addAuthorizedUser,
   getMainUser,
-  getAuthorizedUsers,
+  getAllMainUsers,
+  getAllAuthorizedUsers,
   getUserChild,
+  getAllChildren,
   logoutUser
 };

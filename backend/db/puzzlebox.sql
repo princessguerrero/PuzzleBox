@@ -25,9 +25,9 @@ CREATE TABLE users_main_bio (
 
 CREATE TABLE user_child (
   id SERIAL PRIMARY KEY,
+  admin_username VARCHAR NOT NULL REFERENCES users_main(username),
   first_name VARCHAR NOT NULL,
   last_name VARCHAR NOT NULL,
-  admin_id INTEGER REFERENCES users_main(id),
   date_of_birth VARCHAR NOT NULL,
   age INTEGER,
   pic VARCHAR,
@@ -45,9 +45,7 @@ CREATE TABLE authorized_users (
   auth_user_lastname VARCHAR NOT NULL,
   email VARCHAR NOT NULL UNIQUE,
   relationship VARCHAR NOT NULL,
-  admin_id INTEGER REFERENCES users_main(id),
   admin_username VARCHAR NOT NULL REFERENCES users_main(username),
-  user_child_id INTEGER REFERENCES user_child(id),
   user_child_firstname VARCHAR NOT NULL,
   user_child_lastname VARCHAR NOT NULL
 );
@@ -91,11 +89,11 @@ INSERT INTO users_main (username, email, password_digest)
 INSERT INTO users_main_bio (first_name, last_name, relationship, pic, current_goals, next_steps, notes)
   VALUES ('Princess', 'Guerrero', 'mother', 'mommy photo', 'ADL skills', 'transition to highschool', 'check-out his profile');
 
-INSERT INTO user_child (first_name, last_name, admin_id, date_of_birth, age, pic, school, grade, class_size, diagnosis, likes, dislikes)
-  VALUES ('Philippe', 'Guerrero', 1, 'July 21, 2010', '12', 'photo', 'P4Q@Skillman', '7th', '6-1-1', 'Autism', 'iPad, running', 'loud noises, fireworks');
+INSERT INTO user_child (admin_username, first_name, last_name, date_of_birth, age, pic, school, grade, class_size, diagnosis, likes, dislikes)
+  VALUES ('prinsesa', 'Philippe', 'Guerrero', 'July 21, 2010', '12', 'photo', 'P4Q@Skillman', '7th', '6-1-1', 'Autism', 'iPad, running', 'loud noises, fireworks');
 
-INSERT INTO authorized_users (auth_user_firstname, auth_user_lastname, email, relationship, admin_id, admin_username, user_child_id , user_child_firstname, user_child_lastname)
-  VALUES ('Joselito', 'Guerrero', 'jose@jose.com', 'father', 1, 'prinsesa', 1, 'Philippe', 'Guerrero');
+INSERT INTO authorized_users (auth_user_firstname, auth_user_lastname, email, relationship, admin_username, user_child_firstname, user_child_lastname)
+  VALUES ('Joselito', 'Guerrero', 'jose@jose.com', 'father', 'prinsesa', 'Philippe', 'Guerrero');
 
 INSERT INTO contacts (user_child_id, organization, fullname, job_title, org_address, phone, website)
   VALUES (1, 'The Thrive Network', 'Chad Alexander', 'Medicaid Service Coordinator', '241 37th St., Suite 604 Brooklyn, NY 11232', '(718) 965-1998', 'www.thethrivenetwork.org'),

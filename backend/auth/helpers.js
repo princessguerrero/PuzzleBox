@@ -1,6 +1,4 @@
 const bcrypt = require("bcryptjs");
-const pgp = require("pg-promise")({});
-const db = pgp("postgres://localhost/puzzlebox");
 
 function comparePassword(userPassword, dbPassword) {
   return bcrypt.compareSync(userPassword, dbPassword);

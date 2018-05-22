@@ -1,10 +1,8 @@
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const init = require("./passport");
-const pgp = require("pg-promise")({});
-const db = pgp("postgres://localhost/puzzlebox");
 const authHelpers = require("./helpers");
-
+const db = require("../db/index");
 const options = {};
 
 init();
@@ -14,7 +12,7 @@ passport.use(
     console.log("Trying to authenticate...");
 
     db
-      .any("SELECT * FROM users WHERE username=$1", [username])
+      .any("SELECT * FROM users_main WHERE username=$1", [username])
       .then(rows => {
         const user = rows[0];
         if (!user) {
