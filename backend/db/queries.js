@@ -53,12 +53,13 @@ function mainUserBio(req, res, next) {
 function addUserChild(req, res, next) {
   db
     .none(
-      "INSERT INTO user_child (first_name, last_name, date_of_birth, age, pic, school, grade, class_size, diagnosis, likes, dislikes) VALUES (${first_name}, ${last_name}, ${date_of_birth}, ${age}, ${pic}, ${school}, ${grade}, ${class_size}, ${diagnosis}, ${likes}, ${dislikes})",
+      "INSERT INTO user_child (admin_username, first_name, last_name, date_of_birth, age, pic, school, grade, class_size, diagnosis, likes, dislikes) VALUES (${admin_username}, ${first_name}, ${last_name}, ${date_of_birth}, ${age}, ${pic}, ${school}, ${grade}, ${class_size}, ${diagnosis}, ${likes}, ${dislikes})",
       {
+        admin_username: req.user.username,
         first_name: req.body.first_name,
         last_name: req.body.last_name,
         date_of_birth: req.body.date_of_birth,
-        age: req.body.age,
+        age: req.body.age,  
         pic: req.body.pic,
         school: req.body.school,
         grade: req.body.grade,

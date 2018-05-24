@@ -12,9 +12,9 @@ router.get("/getAllAuthorizedUsers", loginRequired, db.getAllAuthorizedUsers);
 router.get("/getAllChildren", loginRequired, db.getAllChildren);
 
 // POST routes
-router.post("/mainUserBio", db.mainUserBio);
-router.post("/addChildInfo", db.addUserChild);
-router.post("/addAuthUser", db.addAuthorizedUser);
+router.post("/mainUserBio", loginRequired, db.mainUserBio);
+router.post("/addChildInfo", loginRequired, db.addUserChild);
+router.post("/addAuthUser", loginRequired, db.addAuthorizedUser);
 
 // User authentication routes
 router.post(
