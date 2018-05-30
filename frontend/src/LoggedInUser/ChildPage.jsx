@@ -57,6 +57,18 @@ class ChildPage extends React.Component {
             <Tab>Next Steps</Tab>
             <Tab>Resources</Tab>
           </TabList>
+       
+        <TabPanel>
+          <div>
+            Date of Birth: {oneChild.date_of_birth} <br/>
+            Diagnosis: {oneChild.diagnosis}<br/>
+            School: {oneChild.school}<br/>
+            Grade Level: {oneChild.grade}<br/>
+            Class Size: {oneChild.class_size}<br/>
+            Likes: {oneChild.likes}<br/>
+            Dislikes: {oneChild.dislikes}<br/>
+          </div>
+        </TabPanel>
         </Tabs>
       </div>
     );
