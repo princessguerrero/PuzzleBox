@@ -115,7 +115,7 @@ class NewUser extends React.Component {
       <div className="register-user-container">
         {/* nav bar goes here  */}
 
-        <h2 id="navLogoName"> Be clutter-free.  Sign-up for Puzzlebox. </h2>
+        <h2 id="navLogoName"> Sign-up. </h2>
         <div className="registerBox" className="registerBox">
           <form onSubmit={this.submitForm} className="new-user-form">
             <input
@@ -126,7 +126,7 @@ class NewUser extends React.Component {
               value={username}
               onChange={this.handleInput}
             />
-
+            <br/>
             <input
               className="emailBox"
               placeholder="Email"
@@ -135,7 +135,7 @@ class NewUser extends React.Component {
               value={email}
               onChange={this.handleInput}
             />
-
+            <br/>
             <input
               className="passwordBox"
               placeholder="Password"
@@ -144,7 +144,7 @@ class NewUser extends React.Component {
               value={password}
               onChange={this.handleInput}
             />
-
+            <br/>
             <input
               className="loginBtn"
               type="submit"
@@ -152,6 +152,9 @@ class NewUser extends React.Component {
               onClick={this.renderSurvey}
             />
           </form>
+          <div>
+            Already have an account?<Link to="/users/login"> Login</Link>
+        </div> {/* End smaller-box */}
         </div>
         {message}
       </div>

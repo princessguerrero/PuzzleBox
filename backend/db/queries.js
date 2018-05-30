@@ -59,7 +59,7 @@ function addUserChild(req, res, next) {
         first_name: req.body.first_name,
         last_name: req.body.last_name,
         date_of_birth: req.body.date_of_birth,
-        age: req.body.age,  
+        age: req.body.age,
         pic: req.body.pic,
         school: req.body.school,
         grade: req.body.grade,
@@ -150,38 +150,50 @@ function getAllAuthorizedUsers(req, res, next) {
 }
 
 // get a users' child
+// function getUserChild(req, res, next) {
+//   db
+//     .one(
+//       "SELECT first_name, last_name FROM user_child WHERE admin_username=${admin_username}",
+//       {
+//         admin_username: req.user.username
+//       }
+//     )
+//     .then(data => {
+//       res.status(200).json({ user: data });
+//     });
+// }
+
 function getUserChild(req, res, next) {
+    db
+      .one("SELECT * FROM user_child WHERE id=${id}", {
+        id: req.params.id
+      })
+      .then(data => {
+        res.status(200).json( data );
+      });
+  }
+
+// get all users' children
+function getAllChildren(req, res, next) {
   db
-    .one(
-      "SELECT first_name, last_name FROM user_child WHERE admin_username=${admin_username}",
+    .any(
+      "SELECT id, first_name, last_name, pic FROM user_child WHERE admin_username=${admin_username}",
       {
         admin_username: req.user.username
       }
     )
     .then(data => {
-      res.status(200).json({ user: data });
+      console.log("data:", data);
+      res.status(200).json({
+        status: "success",
+        data: data,
+        message: "Retrieved all users children"
+      });
+    })
+    .catch(err => {
+      return next(err);
     });
 }
-
-// get all users' children
-function getAllChildren(req, res, next) {
-    db
-      .any("SELECT first_name, last_name FROM user_child WHERE admin_username=${admin_username}",
-    {
-        admin_username: req.user.username
-    })
-      .then(data => {
-        console.log("data:", data);
-        res.status(200).json({
-          status: "success",
-          data: data,
-          message: "Retrieved all users children"
-        });
-      })
-      .catch(err => {
-        return next(err);
-      });
-  }
 
 // Log out user
 function logoutUser(req, res, next) {

@@ -2,17 +2,17 @@ import React, { Component } from "react";
 import { Redirect } from "react-router";
 import axios from "axios";
 
-class LogOutUser extends Component {
+class LogoutUser extends Component {
   constructor() {
     super();
     this.state = {
-      loggedOut: false
+      loggedOut: false,
     };
   }
 
   //onClick on the link we are automatically logging out
   componentDidMount() {
-    this.props.logOutUser();
+    this.props.logoutUser();
     this.setState({
       loggedOut: true
     });
@@ -29,4 +29,4 @@ class LogOutUser extends Component {
   }
 }
 
-export default LogOutUser;
+export default LogoutUser;

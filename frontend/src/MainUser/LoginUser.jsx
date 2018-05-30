@@ -37,7 +37,7 @@ class LoginUser extends React.Component {
         })
         .then(res => {
           console.log(res.data);
-        //   this.props.setUser(res.data);
+          this.props.setUser(res.data);
         //   this.props.active();
           this.setState({
             usernameInput: "",
@@ -62,7 +62,7 @@ class LoginUser extends React.Component {
     console.log(this.state);
 
     if (loggedIn) {
-      return <Redirect to="/users/kidslist" />;
+      return <Redirect to="/users/childrenlist" />;
     }
 
     return (
@@ -78,6 +78,7 @@ class LoginUser extends React.Component {
               onChange={this.handleInput}
               required
             />
+            <br/>
             <input
               className="passwordBox"
               placeholder="Password"

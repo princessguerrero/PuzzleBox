@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import { Link, Redirect } from "react-router-dom";
 
-class KidsBio extends React.Component {
+class ChildBio extends React.Component {
   constructor(props) {
     super(props);
 
@@ -190,4 +190,4 @@ class KidsBio extends React.Component {
     );
   }
 }
-export default KidsBio;
+export default ChildBio;
