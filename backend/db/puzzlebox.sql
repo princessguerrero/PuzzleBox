@@ -50,30 +50,16 @@ CREATE TABLE authorized_users (
   user_child_lastname VARCHAR NOT NULL
 );
 
-CREATE TABLE contacts (
+CREATE TABLE services (
   id SERIAL PRIMARY KEY,
   user_child_id INTEGER REFERENCES user_child(id),
   organization VARCHAR,
   fullname VARCHAR,
   job_title VARCHAR,
+  frequency VARCHAR,
   org_address VARCHAR,
   phone VARCHAR,
   website VARCHAR
-);
-
-CREATE TABLE contacts_notes (
-  id SERIAL PRIMARY KEY,
-  contact_id INTEGER REFERENCES contacts(id),
-  notes VARCHAR,
-  timestamp VARCHAR NOT NULL 
-);
-
-CREATE TABLE services (
-  id SERIAL PRIMARY KEY,
-  user_child_id INTEGER REFERENCES user_child(id),
-  provider_id INTEGER REFERENCES contacts(id),
-  provider_fullname VARCHAR,
-  frequency VARCHAR
 );
 
 CREATE TABLE services_notes (
@@ -95,9 +81,6 @@ INSERT INTO user_child (admin_username, first_name, last_name, date_of_birth, ag
 INSERT INTO authorized_users (auth_user_firstname, auth_user_lastname, email, relationship, admin_username, user_child_firstname, user_child_lastname)
   VALUES ('Joselito', 'Guerrero', 'jose@jose.com', 'father', 'prinsesa', 'Philippe', 'Guerrero');
 
-INSERT INTO contacts (user_child_id, organization, fullname, job_title, org_address, phone, website)
-  VALUES (1, 'The Thrive Network', 'Chad Alexander', 'Medicaid Service Coordinator', '241 37th St., Suite 604 Brooklyn, NY 11232', '(718) 965-1998', 'www.thethrivenetwork.org'),
-         (1, 'Marie Pense Center', 'Mildred Amarteifio', 'SETSS provider', '37 West 20th St., Suite 909, New York, NY 10011', '(212) 362-7013', 'mpcny.org');
-
-INSERT INTO services (user_child_id, provider_id, provider_fullname, frequency)
-  VALUES (1, 2, 'Mildred Amarteifio', '10 hours/week');
+INSERT INTO services (user_child_id, organization, fullname, job_title, frequency, org_address, phone, website)
+  VALUES (1, 'The Thrive Network', 'Chad Alexander', 'Medicaid Service Coordinator', 'by appointment', '241 37th St., Suite 604 Brooklyn, NY 11232', '(718) 965-1998', 'www.thethrivenetwork.org'),
+         (1, 'Marie Pense Center', 'Mildred Amarteifio', 'SETSS provider', '10 hours per week', '37 West 20th St., Suite 909, New York, NY 10011', '(212) 362-7013', 'mpcny.org');
