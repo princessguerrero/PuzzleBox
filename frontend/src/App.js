@@ -11,6 +11,7 @@ import ChildBio from "./LoggedInUser/ChildBio";
 import ChildrenList from "./LoggedInUser/ChildrenList";
 import ChildPage from "./LoggedInUser/ChildPage";
 import MainUserProfile from "./LoggedInUser/MainUserProfile";
+import AddService from "./LoggedInUser/AddService";
 
 class App extends Component {
   constructor() {
@@ -129,6 +130,13 @@ class App extends Component {
     )
   }
 
+  renderAddService = routeProps => {
+    const { user, active, username } = this.state;
+    return (
+      <AddService user={user} username={username} active={this.isActive} id={routeProps.match.params.id} />
+    )
+  }
+
   render() {
     const { user, active, username } = this.state;
     console.log("app", this.state);
@@ -165,6 +173,7 @@ class App extends Component {
             <Route path="/users/signup/newuserbio" component={NewUserBio} />
             <Route path="/users/childbio" render={this.renderChildBio} />
             <Route path="/users/mainuserprofile" render={this.renderMainUserProfile} />
+            <Route path="/users/child/:id/service/add" render={this.renderAddService} />
             <Route
               path="/users/childrenlist"
               render={this.renderChildrenList}

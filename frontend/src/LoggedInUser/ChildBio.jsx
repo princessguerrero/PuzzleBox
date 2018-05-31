@@ -81,7 +81,7 @@ class ChildBio extends React.Component {
       return (
         <Redirect
           to={{
-            pathname: "/users/kids/profile",
+            pathname: "/users/childrenlist",
             state: { referrer: this.state.username }
           }}
         />

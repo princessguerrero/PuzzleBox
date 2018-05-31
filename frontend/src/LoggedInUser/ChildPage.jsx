@@ -41,7 +41,12 @@ class ChildPage extends React.Component {
     this.getOneChild();
   }
 
-  handleClickAddService
+  handleClickAddService  = e => {
+    e.preventDefault();
+    const { id } = this.state;
+    return (window.location.href = `http://localhost:3000/users/child/${id}/service/add`);
+  };
+
   render() {
     const { user, admin_username, oneChild, id } = this.state;
     console.log("child in profile", oneChild);

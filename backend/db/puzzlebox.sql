@@ -57,7 +57,8 @@ CREATE TABLE services (
   frequency VARCHAR,
   org_address VARCHAR,
   phone VARCHAR,
-  website VARCHAR
+  website VARCHAR,
+  service_category VARCHAR
 );
 
 CREATE TABLE services_notes (
@@ -79,6 +80,6 @@ INSERT INTO user_child (admin_username, first_name, last_name, date_of_birth, ag
 INSERT INTO authorized_users (auth_user_firstname, auth_user_lastname, email, relationship, admin_username, user_child_firstname, user_child_lastname)
   VALUES ('Joselito', 'Guerrero', 'jose@jose.com', 'father', 'prinsesa', 'Philippe', 'Guerrero');
 
-INSERT INTO services (user_child_id, organization, fullname, job_title, frequency, org_address, phone, website)
-  VALUES (1, 'The Thrive Network', 'Chad Alexander', 'Medicaid Service Coordinator', 'by appointment', '241 37th St., Suite 604 Brooklyn, NY 11232', '(718) 965-1998', 'www.thethrivenetwork.org'),
-         (1, 'Marie Pense Center', 'Mildred Amarteifio', 'SETSS provider', '10 hours per week', '37 West 20th St., Suite 909, New York, NY 10011', '(212) 362-7013', 'mpcny.org');
+INSERT INTO services (user_child_id, organization, fullname, job_title, frequency, org_address, phone, website, service_category)
+  VALUES (1, 'The Thrive Network', 'Chad Alexander', 'Medicaid Service Coordinator', 'by appointment', '241 37th St., Suite 604 Brooklyn, NY 11232', '(718) 965-1998', 'www.thethrivenetwork.org', 'medicaid/insurance'),
+         (1, 'Marie Pense Center', 'Mildred Amarteifio', 'SETSS provider', '10 hours per week', '37 West 20th St., Suite 909, New York, NY 10011', '(212) 362-7013', 'mpcny.org', 'in-home');

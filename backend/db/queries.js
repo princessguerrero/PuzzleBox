@@ -81,7 +81,7 @@ function addUserChild(req, res, next) {
 function addService(req, res, next) {
   db
     .none(
-      "INSERT INTO services (user_child_id, organization, fullname, job_title, frequency, org_address, phone, website) VALUES (${user_child_id}, ${organization}, ${fullname}, ${job_title}, ${frequency}, ${org_address}, ${phone}, ${website})",
+      "INSERT INTO services (user_child_id, organization, fullname, job_title, frequency, org_address, phone, website, service_category) VALUES (${user_child_id}, ${organization}, ${fullname}, ${job_title}, ${frequency}, ${org_address}, ${phone}, ${website}, ${service_category})",
       {
         user_child_id: req.params.user_child_id,
         organization: req.body.organization,
@@ -90,7 +90,8 @@ function addService(req, res, next) {
         frequency: req.body.frequency,
         org_address: req.body.org_address,
         phone: req.body.phone,
-        website: req.body.website
+        website: req.body.website,
+        service_category: req.body.service_category
       }
     )
     .then(() => {

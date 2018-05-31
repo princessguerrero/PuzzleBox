@@ -44,7 +44,7 @@ class Services extends React.Component {
            return <div><div>{service.fullname}, {service.job_title} Frequency: {service.frequency}</div>
            </div>
        })}
-       <button>Add Service</button>
+       <button onClick={this.props.handleClickAddService}>Add Service</button>
       </div>
     );
   }
