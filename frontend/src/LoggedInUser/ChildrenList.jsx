@@ -44,7 +44,7 @@ class ChildrenList extends React.Component {
               <div>
         {allChildren.map(child => {
             console.log("child id", child.id)
-            return <div><Link to={`/users/child/${child.id}/profile`} ><img src={child.pic} alt="profile pic"/><span>{child.first_name}{child.last_name}</span></Link></div>
+            return <div><Link to={`/users/child/${child.id}/profile`} ><img src={child.pic} alt="profile pic"/> <span>{child.first_name} {child.last_name}</span></Link></div>
         })}
         </div>
               </div>
