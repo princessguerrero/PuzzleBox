@@ -10,7 +10,7 @@ router.get("/getMainUser", loginRequired, db.getMainUser);
 router.get("/getUserChild/:id", loginRequired, db.getUserChild);
 router.get("/getAllAuthorizedUsers", loginRequired, db.getAllAuthorizedUsers);
 router.get("/getAllChildren", loginRequired, db.getAllChildren);
-
+router.get("/getAllServices/:user_child_id", loginRequired, db.getAllServices);
 // POST routes
 router.post("/mainUserBio", loginRequired, db.mainUserBio);
 router.post("/addChildInfo", loginRequired, db.addUserChild);

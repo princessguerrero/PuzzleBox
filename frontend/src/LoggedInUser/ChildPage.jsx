@@ -4,12 +4,15 @@ import { Route, Link, Switch, Redirect } from "react-router-dom";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 // this is the default style sheet for react-tabs
 import "react-tabs/style/react-tabs.css";
+import Services from "./Services";
+import Contacts from "./Contacts";
+import NextSteps from "./NextSteps";
+import Resources from "./Resources";
 
 class ChildPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: this.props.user,
       admin_username: this.props.username,
       oneChild: {},
       id: this.props.id
@@ -39,7 +42,7 @@ class ChildPage extends React.Component {
   }
 
   render() {
-    const { user, allChildren, oneChild, id } = this.state;
+    const { user, admin_username, oneChild, id } = this.state;
     console.log("child in profile", oneChild);
     return (
       <div>
@@ -69,6 +72,18 @@ class ChildPage extends React.Component {
             Dislikes: {oneChild.dislikes}<br/>
           </div>
         </TabPanel>
+        <TabPanel>
+          <Services admin_username={admin_username} oneChild={oneChild} id={id}/>
+          </TabPanel>
+          <TabPanel>
+          <Contacts admin_username={admin_username} oneChild={oneChild} id={id}/>
+          </TabPanel>
+          <TabPanel>
+          <NextSteps admin_username={admin_username} oneChild={oneChild} id={id}/>
+          </TabPanel>
+          <TabPanel>
+          <Resources admin_username={admin_username} oneChild={oneChild} id={id}/>
+          </TabPanel>
         </Tabs>
       </div>
     );

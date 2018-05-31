@@ -130,6 +130,25 @@ function getAllMainUsers(req, res, next) {
     });
 }
 
+// get all services
+function getAllServices(req, res, next) {
+  db
+    .any("SELECT fullname, frequency, job_title FROM contacts JOIN services ON services.user_child_id = contacts.user_child_id WHERE services.user_child_id=${user_child_id}", {
+      user_child_id: req.params.user_child_id
+    })
+    .then(data => {
+      console.log("data:", data);
+      res.status(200).json({
+        status: "success",
+        data: data,
+        message: "Retrieved all services"
+      });
+    })
+    .catch(err => {
+      return next(err);
+    });
+}
+
 // get all authorized users
 function getAllAuthorizedUsers(req, res, next) {
   db
@@ -164,14 +183,14 @@ function getAllAuthorizedUsers(req, res, next) {
 // }
 
 function getUserChild(req, res, next) {
-    db
-      .one("SELECT * FROM user_child WHERE id=${id}", {
-        id: req.params.id
-      })
-      .then(data => {
-        res.status(200).json( data );
-      });
-  }
+  db
+    .one("SELECT * FROM user_child WHERE id=${id}", {
+      id: req.params.id
+    })
+    .then(data => {
+      res.status(200).json(data);
+    });
+}
 
 // get all users' children
 function getAllChildren(req, res, next) {
@@ -210,6 +229,7 @@ module.exports = {
   addAuthorizedUser,
   getMainUser,
   getAllMainUsers,
+  getAllServices,
   getAllAuthorizedUsers,
   getUserChild,
   getAllChildren,
