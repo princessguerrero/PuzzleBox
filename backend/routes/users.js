@@ -6,7 +6,8 @@ const passport = require("../auth/local");
 
 /* GET routes. */
 router.get("/", db.getAllMainUsers);
-router.get("/getMainUser", loginRequired, db.getMainUser);
+router.get("/getMainUser/", loginRequired, db.getMainUser);
+router.get("/getMainUserBio/:id", loginRequired, db.getMainUserBio);
 router.get("/getUserChild/:id", loginRequired, db.getUserChild);
 router.get("/getAllAuthorizedUsers", loginRequired, db.getAllAuthorizedUsers);
 router.get("/getAllChildren", loginRequired, db.getAllChildren);

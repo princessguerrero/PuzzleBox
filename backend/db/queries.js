@@ -113,6 +113,17 @@ function getMainUser(req, res, next) {
     });
 }
 
+// get main user bio
+function getMainUserBio(req, res, next) {
+    db
+      .one("SELECT * FROM users_main_bio WHERE id=${id}", {
+        id: req.params.id
+      })
+      .then(data => {
+        res.status(200).json({ user: data });
+      });
+  }
+
 // get all main users
 function getAllMainUsers(req, res, next) {
   db
@@ -133,7 +144,7 @@ function getAllMainUsers(req, res, next) {
 // get all services
 function getAllServices(req, res, next) {
   db
-    .any("SELECT fullname, frequency, job_title FROM contacts JOIN services ON services.user_child_id = contacts.user_child_id WHERE services.user_child_id=${user_child_id}", {
+    .any("SELECT * FROM services WHERE user_child_id=${user_child_id}", {
       user_child_id: req.params.user_child_id
     })
     .then(data => {
@@ -228,6 +239,7 @@ module.exports = {
   addUserChild,
   addAuthorizedUser,
   getMainUser,
+  getMainUserBio,
   getAllMainUsers,
   getAllServices,
   getAllAuthorizedUsers,

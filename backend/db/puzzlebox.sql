@@ -3,7 +3,7 @@ CREATE DATABASE puzzlebox;
 
 \c puzzlebox;
 
-DROP TABLE IF EXISTS users_main, users_main_bio, authorized_users, user_child, contacts, contacts_notes, services, services_notes;
+DROP TABLE IF EXISTS users_main, users_main_bio, authorized_users, user_child, services, services_notes;
 
 CREATE TABLE users_main (
   id SERIAL PRIMARY KEY,
@@ -18,8 +18,6 @@ CREATE TABLE users_main_bio (
   last_name VARCHAR NOT NULL,
   relationship VARCHAR NOT NULL,
   pic VARCHAR,
-  current_goals VARCHAR,
-  next_steps VARCHAR,
   notes VARCHAR
 );
 
@@ -72,11 +70,11 @@ CREATE TABLE services_notes (
 INSERT INTO users_main (username, email, password_digest)
   VALUES ('prinsesa', 'princess@princess.com', '$2a$10$f17jjX0NASQWYOln23Ogk.ePXm0TpAs2oq.k4.YOGQGTnkOvZlD/O');
 
-INSERT INTO users_main_bio (first_name, last_name, relationship, pic, current_goals, next_steps, notes)
-  VALUES ('Princess', 'Guerrero', 'mother', 'mommy photo', 'ADL skills', 'transition to highschool', 'check-out his profile');
+INSERT INTO users_main_bio (first_name, last_name, relationship, pic, notes)
+  VALUES ('Princess', 'Guerrero', 'mother', 'https://i.imgur.com/RzNb5m6b.jpg', 'check-out his profile');
 
 INSERT INTO user_child (admin_username, first_name, last_name, date_of_birth, age, pic, school, grade, class_size, diagnosis, likes, dislikes)
-  VALUES ('prinsesa', 'Philippe', 'Guerrero', 'July 21, 2010', '12', 'photo', 'P4Q@Skillman', '7th', '6-1-1', 'Autism', 'iPad, running', 'loud noises, fireworks');
+  VALUES ('prinsesa', 'Philippe', 'Guerrero', 'July 21, 2010', '12', 'https://i.imgur.com/ntJaAMgb.jpg', 'P4Q@Skillman', '7th', '6-1-1', 'Autism', 'iPad, running', 'loud noises, fireworks');
 
 INSERT INTO authorized_users (auth_user_firstname, auth_user_lastname, email, relationship, admin_username, user_child_firstname, user_child_lastname)
   VALUES ('Joselito', 'Guerrero', 'jose@jose.com', 'father', 'prinsesa', 'Philippe', 'Guerrero');

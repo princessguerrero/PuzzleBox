@@ -10,8 +10,6 @@ class NewUserBio extends React.Component {
       last_name: "",
       relationship: "",
       pic: "",
-      current_goals: "",
-      next_steps: "",
       notes: "",
       submitted: false
     };
@@ -32,8 +30,6 @@ class NewUserBio extends React.Component {
         last_name: this.state.last_name,
         relationship: this.state.relationship,
         pic: this.state.pic,
-        current_goals: this.state.current_goals,
-        next_steps: this.state.next_steps,
         notes: this.state.notes
       })
       .then(res => {
@@ -53,8 +49,6 @@ class NewUserBio extends React.Component {
       last_name,
       relationship,
       pic,
-      current_goals,
-      next_steps,
       notes,
       submitted
     } = this.state;
@@ -97,22 +91,6 @@ class NewUserBio extends React.Component {
             value={pic}
             onChange={this.handleInput}
             placeholder="URL"
-          />
-          <br />
-          What skills is the child currently working on?{"  "}
-          <textarea
-            type="text"
-            name="current_goals"
-            value={current_goals}
-            onChange={this.handleInput}
-          />
-          <br />
-          What are the next steps or goals for the child?:{"  "}
-          <textarea
-            type="text"
-            name="next_steps"
-            value={next_steps}
-            onChange={this.handleInput}
           />
           <br />
           Notes:{"  "}

@@ -10,6 +10,7 @@ import NewUserBio from "./MainUser/NewUserBio";
 import ChildBio from "./LoggedInUser/ChildBio";
 import ChildrenList from "./LoggedInUser/ChildrenList";
 import ChildPage from "./LoggedInUser/ChildPage";
+import MainUserProfile from "./LoggedInUser/MainUserProfile";
 
 class App extends Component {
   constructor() {
@@ -93,10 +94,9 @@ class App extends Component {
       });
   }
 
- 
   renderChildrenList = () => {
     const { user, active, username } = this.state;
-    console.log("renderchildrenlist", this.state)
+    console.log("renderchildrenlist", this.state);
     return (
       <ChildrenList
         // setUser={this.setUser}
@@ -107,9 +107,9 @@ class App extends Component {
     );
   };
 
-  renderChildPage = (routeProps) => {
+  renderChildPage = routeProps => {
     const { user, active, username } = this.state;
-    console.log(routeProps)
+    console.log(routeProps);
     return (
       <ChildPage
         // setUser={this.setUser}
@@ -121,18 +121,41 @@ class App extends Component {
     );
   };
 
+  renderMainUserProfile = () => {
+    const { user, active, username } = this.state;
+    console.log("mainuserprof", this.state)
+    return (
+      <MainUserProfile user={user} username={username} active={this.isActive}/>
+    )
+  }
+
   render() {
     const { user, active, username } = this.state;
     console.log("app", this.state);
     return (
       <div>
-        puzzlebox
+        {user ? (
+          <Link to="/users/childrenlist">puzzlebox</Link>
+        ) : (
+          <Link to="/users">puzzlebox</Link>
+        )}
         <div>
           {/* {user ? "" : <Link to="/users">Register</Link>}
           {"  "}
           {"  "}
           {user ? "" : <Link to="/users/login">Login</Link>}{"  "}{"  "} */}
-          {user ? <Link to='/users/logout'>Logout</Link> : ""}
+          {user ? (
+            <Link to="/users/mainuserprofile">
+              <span>
+                <i class="far fa-lg fa-user" />
+              </span>
+            </Link>
+          ) : (
+            ""
+          )}
+        {"  "}
+          {user ? <Link to="/users/logout">Logout</Link> : ""}
+         
         </div>
         <div>
           <Switch>
@@ -141,6 +164,7 @@ class App extends Component {
             <Route path="/users/logout" render={this.renderLogoutUser} />
             <Route path="/users/signup/newuserbio" component={NewUserBio} />
             <Route path="/users/childbio" render={this.renderChildBio} />
+            <Route path="/users/mainuserprofile" render={this.renderMainUserProfile} />
             <Route
               path="/users/childrenlist"
               render={this.renderChildrenList}
