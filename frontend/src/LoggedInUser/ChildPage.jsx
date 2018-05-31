@@ -56,33 +56,47 @@ class ChildPage extends React.Component {
           <TabList>
             <Tab>About</Tab>
             <Tab>Services</Tab>
-            <Tab>Contacts</Tab>
             <Tab>Next Steps</Tab>
             <Tab>Resources</Tab>
           </TabList>
-       
-        <TabPanel>
-          <div>
-            Date of Birth: {oneChild.date_of_birth} <br/>
-            Diagnosis: {oneChild.diagnosis}<br/>
-            School: {oneChild.school}<br/>
-            Grade Level: {oneChild.grade}<br/>
-            Class Size: {oneChild.class_size}<br/>
-            Likes: {oneChild.likes}<br/>
-            Dislikes: {oneChild.dislikes}<br/>
-          </div>
-        </TabPanel>
-        <TabPanel>
-          <Services admin_username={admin_username} oneChild={oneChild} id={id}/>
+
+          <TabPanel>
+            <div>
+              Date of Birth: {oneChild.date_of_birth} <br />
+              Diagnosis: {oneChild.diagnosis}
+              <br />
+              School: {oneChild.school}
+              <br />
+              Grade Level: {oneChild.grade}
+              <br />
+              Class Size: {oneChild.class_size}
+              <br />
+              Likes: {oneChild.likes}
+              <br />
+              Dislikes: {oneChild.dislikes}
+              <br />
+            </div>
           </TabPanel>
           <TabPanel>
-          <Contacts admin_username={admin_username} oneChild={oneChild} id={id}/>
+            <Services
+              admin_username={admin_username}
+              oneChild={oneChild}
+              id={id}
+            />
           </TabPanel>
           <TabPanel>
-          <NextSteps admin_username={admin_username} oneChild={oneChild} id={id}/>
+            <NextSteps
+              admin_username={admin_username}
+              oneChild={oneChild}
+              id={id}
+            />
           </TabPanel>
           <TabPanel>
-          <Resources admin_username={admin_username} oneChild={oneChild} id={id}/>
+            <Resources
+              admin_username={admin_username}
+              oneChild={oneChild}
+              id={id}
+            />
           </TabPanel>
         </Tabs>
       </div>
