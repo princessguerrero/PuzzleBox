@@ -16,6 +16,7 @@ router.get("/getAllServices/:user_child_id", loginRequired, db.getAllServices);
 router.post("/mainUserBio", loginRequired, db.mainUserBio);
 router.post("/addChildInfo", loginRequired, db.addUserChild);
 router.post("/addAuthUser", loginRequired, db.addAuthorizedUser);
+router.post("/addService/:user_child_id", loginRequired, db.addService);
 
 // User authentication routes
 router.post(

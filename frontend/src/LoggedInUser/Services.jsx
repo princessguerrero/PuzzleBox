@@ -40,7 +40,11 @@ class Services extends React.Component {
     console.log("this is services", this.state);
     return (
       <div>
-       
+       {allServices.map(service => {
+           return <div><div>{service.fullname}, {service.job_title} Frequency: {service.frequency}</div>
+           </div>
+       })}
+       <button>Add Service</button>
       </div>
     );
   }

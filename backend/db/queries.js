@@ -74,7 +74,30 @@ function addUserChild(req, res, next) {
     })
     .catch(err => {
       console.log(`error adding child user bio: `, err);
-      // res.status(500).send("error adding user attributes: ", err);
+    });
+}
+
+// add a service
+function addService(req, res, next) {
+  db
+    .none(
+      "INSERT INTO services (user_child_id, organization, fullname, job_title, frequency, org_address, phone, website) VALUES (${user_child_id}, ${organization}, ${fullname}, ${job_title}, ${frequency}, ${org_address}, ${phone}, ${website})",
+      {
+        user_child_id: req.params.user_child_id,
+        organization: req.body.organization,
+        fullname: req.body.fullname,
+        job_title: req.body.job_title,
+        frequency: req.body.frequency,
+        org_address: req.body.org_address,
+        phone: req.body.phone,
+        website: req.body.website
+      }
+    )
+    .then(() => {
+      res.status(200).send("added a service into database");
+    })
+    .catch(err => {
+      console.log(`error adding service: `, err);
     });
 }
 
@@ -115,14 +138,14 @@ function getMainUser(req, res, next) {
 
 // get main user bio
 function getMainUserBio(req, res, next) {
-    db
-      .one("SELECT * FROM users_main_bio WHERE id=${id}", {
-        id: req.params.id
-      })
-      .then(data => {
-        res.status(200).json({ user: data });
-      });
-  }
+  db
+    .one("SELECT * FROM users_main_bio WHERE id=${id}", {
+      id: req.params.id
+    })
+    .then(data => {
+      res.status(200).json({ user: data });
+    });
+}
 
 // get all main users
 function getAllMainUsers(req, res, next) {
@@ -237,6 +260,7 @@ module.exports = {
   registerUser,
   mainUserBio,
   addUserChild,
+  addService,
   addAuthorizedUser,
   getMainUser,
   getMainUserBio,

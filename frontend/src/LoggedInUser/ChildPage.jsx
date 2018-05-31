@@ -41,6 +41,7 @@ class ChildPage extends React.Component {
     this.getOneChild();
   }
 
+  handleClickAddService
   render() {
     const { user, admin_username, oneChild, id } = this.state;
     console.log("child in profile", oneChild);
@@ -82,6 +83,7 @@ class ChildPage extends React.Component {
               admin_username={admin_username}
               oneChild={oneChild}
               id={id}
+              handleClickAddService={this.handleClickAddService}
             />
           </TabPanel>
           <TabPanel>
