@@ -7,18 +7,18 @@ class MainUserProfile extends React.Component {
         super(props);
         this.state = {
             user: this.props.user,
-            username: this.props.username,
+            mainUserBio: {}
         }
     }
 
     getMainUserBio = () => {
-        const { user, username } = this.state;
+        const { user, mainUserBio } = this.state;
         axios
-          .get(`/users/getMainUser`)
+          .get(`/users/getMainUserBio/${user.username}`)
           .then(response => {
             console.log("getMainUser response, ", response.data);
             this.setState({
-              oneChild: response.data
+              mainUserBio: response.data.user
             });
           })
           .catch(err => {
@@ -29,10 +29,21 @@ class MainUserProfile extends React.Component {
           });
       };
 
+      componentDidMount() {
+        this.getMainUserBio();
+      }
+
     render () {
+        const { user, mainUserBio, id } = this.state;
+        console.log("this is mainuserbio", this.state)
+        console.log("user in bio", user)
         return(
             <div>
-                this is your profile you main user you!
+                Hello there, {mainUserBio.first_name}
+                <div><img src={mainUserBio.pic} alt="main user pic" /></div>
+                <div>Name: {mainUserBio.first_name} {mainUserBio.last_name}</div>
+                <div>Relationship: {mainUserBio.relationship}</div>
+                <div>Message/Notes: {mainUserBio.notes} </div>
                 </div>
         )
     }

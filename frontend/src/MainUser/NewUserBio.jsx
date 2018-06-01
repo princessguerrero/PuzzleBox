@@ -3,9 +3,10 @@ import axios from "axios";
 import { Link, Redirect } from "react-router-dom";
 
 class NewUserBio extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
+      username: this.props.user,
       first_name: "",
       last_name: "",
       relationship: "",
@@ -45,6 +46,7 @@ class NewUserBio extends React.Component {
 
   render() {
     const {
+      username,
       first_name,
       last_name,
       relationship,
@@ -53,8 +55,9 @@ class NewUserBio extends React.Component {
       submitted
     } = this.state;
     console.log("new user bio", this.state)
+
     if (submitted) {
-        return <Redirect to="/users/kids" />;
+        return <Redirect to="/users/childbio" />;
       }
     return (
       <div>

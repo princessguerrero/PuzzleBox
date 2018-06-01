@@ -74,6 +74,23 @@ class NewUser extends React.Component {
                 loggedIn: true
               });
             })
+            .then(() => { 
+              axios
+              .post("/users/login", {
+                username: username,
+                password: password
+              })
+              .then(res => {
+                console.log(res.data);
+                this.props.setUser(res.data);
+              //   this.props.active();
+                this.setState({
+                  username: "",
+                  password: "",
+                  loggedIn: true
+                });
+              })
+            })
             .catch(err => {
               console.log(err);
               this.setState({
@@ -149,7 +166,7 @@ class NewUser extends React.Component {
               className="loginBtn"
               type="submit"
               value="Sign Up"
-              onClick={this.renderSurvey}
+              onClick={this.renderNewUserBio}
             />
           </form>
           <div>

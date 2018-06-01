@@ -18,6 +18,7 @@ function registerUser(req, res, next) {
     )
     .then(() => {
       res.status(200).send("registered user into database");
+      // res.next()
     })
     .catch(err => {
       // ***** ADD if/else statements for different errors *****
@@ -29,14 +30,13 @@ function registerUser(req, res, next) {
 function mainUserBio(req, res, next) {
   db
     .none(
-      "INSERT INTO users_main_bio (first_name, last_name, relationship, pic, current_goals, next_steps, notes) VALUES (${first_name}, ${last_name}, ${relationship}, ${pic}, ${current_goals}, ${next_steps}, ${notes})",
+      "INSERT INTO users_main_bio (username, first_name, last_name, relationship, pic, notes) VALUES (${username}, ${first_name}, ${last_name}, ${relationship}, ${pic}, ${notes})",
       {
+        username: req.user.username,
         first_name: req.body.first_name,
         last_name: req.body.last_name,
         relationship: req.body.relationship,
         pic: req.body.pic,
-        current_goals: req.body.current_goals,
-        next_steps: req.body.next_steps,
         notes: req.body.notes
       }
     )
@@ -140,8 +140,8 @@ function getMainUser(req, res, next) {
 // get main user bio
 function getMainUserBio(req, res, next) {
   db
-    .one("SELECT * FROM users_main_bio WHERE id=${id}", {
-      id: req.params.id
+    .one("SELECT first_name, last_name, relationship, pic, notes FROM users_main_bio WHERE username=${username}", {
+      username: req.params.username
     })
     .then(data => {
       res.status(200).json({ user: data });

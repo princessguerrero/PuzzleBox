@@ -14,6 +14,7 @@ CREATE TABLE users_main (
 
 CREATE TABLE users_main_bio (
   id SERIAL PRIMARY KEY,
+  username VARCHAR NOT NULL REFERENCES users_main(username),
   first_name VARCHAR NOT NULL,
   last_name VARCHAR NOT NULL,
   relationship VARCHAR NOT NULL,
@@ -71,8 +72,8 @@ CREATE TABLE services_notes (
 INSERT INTO users_main (username, email, password_digest)
   VALUES ('prinsesa', 'princess@princess.com', '$2a$10$f17jjX0NASQWYOln23Ogk.ePXm0TpAs2oq.k4.YOGQGTnkOvZlD/O');
 
-INSERT INTO users_main_bio (first_name, last_name, relationship, pic, notes)
-  VALUES ('Princess', 'Guerrero', 'mother', 'https://i.imgur.com/RzNb5m6b.jpg', 'check-out his profile');
+INSERT INTO users_main_bio (username, first_name, last_name, relationship, pic, notes)
+  VALUES ('prinsesa', 'Princess', 'Guerrero', 'mother', 'https://i.imgur.com/RzNb5m6b.jpg', 'check-out his profile');
 
 INSERT INTO user_child (admin_username, first_name, last_name, date_of_birth, age, pic, school, grade, class_size, diagnosis, likes, dislikes)
   VALUES ('prinsesa', 'Philippe', 'Guerrero', 'July 21, 2010', '12', 'https://i.imgur.com/ntJaAMgb.jpg', 'P4Q@Skillman', '7th', '6-1-1', 'Autism', 'iPad, running', 'loud noises, fireworks');

@@ -75,7 +75,7 @@ class ChildBio extends React.Component {
       dislikes,
       addedChild
     } = this.state;
-    console.log("kids", this.state);
+    console.log("children", this.state);
 
     if (addedChild)
       return (
@@ -90,7 +90,7 @@ class ChildBio extends React.Component {
     return (
       <div>
         <div> Hello {admin_username} </div>
-        this is kids.jsx
+        this is childbio.jsx
         <form>
           First Name:{"  "}
           <input

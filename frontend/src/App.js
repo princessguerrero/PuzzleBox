@@ -19,7 +19,8 @@ class App extends Component {
     this.state = {
       user: null,
       active: false,
-      username: null
+      username: null,
+      loggedIn: false
     };
   }
 
@@ -95,6 +96,23 @@ class App extends Component {
       });
   }
 
+  renderNewUser = () => {
+    const { user, active } = this.state;
+    console.log(this.state);
+    if (active === false) {
+      return <NewUser setUser={this.setUser} active={this.isActive} />;
+    } else {
+      return <Redirect to="/users/signup/newuserbio" />;
+    }
+  };
+
+  renderNewUserBio = () => {
+    const { user, active } = this.state;
+    return <NewUserBio setUser={this.setUser}
+    user={user}
+    active={this.isActive} />
+  }
+
   renderChildrenList = () => {
     const { user, active, username } = this.state;
     console.log("renderchildrenlist", this.state);
@@ -138,7 +156,7 @@ class App extends Component {
   }
 
   render() {
-    const { user, active, username } = this.state;
+    const { user, active, username, loggedIn } = this.state;
     console.log("app", this.state);
     return (
       <div>
@@ -162,15 +180,15 @@ class App extends Component {
             ""
           )}
         {"  "}
-          {user ? <Link to="/users/logout">Logout</Link> : ""}
+          {user ? <Link to="/users/logout"><span><i class="fas fa-sign-out-alt"></i></span></Link> : ""}
          
         </div>
         <div>
           <Switch>
-            <Route exact path="/users" component={NewUser} />
+            <Route exact path="/users" render={this.renderNewUser} />
             <Route exact path="/users/login" render={this.renderLogin} />
             <Route path="/users/logout" render={this.renderLogoutUser} />
-            <Route path="/users/signup/newuserbio" component={NewUserBio} />
+            <Route path="/users/signup/newuserbio" render={this.renderNewUserBio} />
             <Route path="/users/childbio" render={this.renderChildBio} />
             <Route path="/users/mainuserprofile" render={this.renderMainUserProfile} />
             <Route path="/users/child/:id/service/add" render={this.renderAddService} />
