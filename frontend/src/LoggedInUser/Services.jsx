@@ -40,8 +40,9 @@ class Services extends React.Component {
     console.log("this is services", this.state);
     return (
       <div>
+        <p>Here you can view and add service providers.</p>
        {allServices.map(service => {
-           return <div><div>{service.fullname}, {service.job_title} Frequency: {service.frequency}</div>
+           return <div>{service.fullname}, {service.job_title} Frequency: {service.frequency}
            </div>
        })}
        <button onClick={this.props.handleClickAddService}>Add Service</button>

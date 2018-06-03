@@ -157,7 +157,7 @@ class ChildBio extends React.Component {
             onChange={this.handleInput}
           />
           <br />
-          Diagnosis:{"  "}
+          Medical Condition/Diagnosis:{"  "}
           <input
             type="text"
             name="diagnosis"

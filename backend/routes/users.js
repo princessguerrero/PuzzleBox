@@ -12,12 +12,13 @@ router.get("/getUserChild/:id", loginRequired, db.getUserChild);
 router.get("/getAllAuthorizedUsers", loginRequired, db.getAllAuthorizedUsers);
 router.get("/getAllChildren", loginRequired, db.getAllChildren);
 router.get("/getAllServices/:user_child_id", loginRequired, db.getAllServices);
+router.get("/getAllNextSteps/:user_child_id", loginRequired, db.getAllNextSteps);
 // POST routes
 router.post("/mainUserBio", db.mainUserBio);
 router.post("/addChildInfo", loginRequired, db.addUserChild);
 router.post("/addAuthUser", loginRequired, db.addAuthorizedUser);
 router.post("/addService/:user_child_id", loginRequired, db.addService);
-
+router.post("/addNextSteps/:user_child_id", loginRequired, db.addNextSteps);
 // User authentication routes
 router.post(
   "/register",

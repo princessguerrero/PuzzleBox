@@ -3,7 +3,7 @@ CREATE DATABASE puzzlebox;
 
 \c puzzlebox;
 
-DROP TABLE IF EXISTS users_main, users_main_bio, authorized_users, user_child, services, services_notes;
+DROP TABLE IF EXISTS users_main, users_main_bio, authorized_users, user_child, services, next_steps, resources;
 
 CREATE TABLE users_main (
   id SERIAL PRIMARY KEY,
@@ -62,12 +62,18 @@ CREATE TABLE services (
   service_category VARCHAR
 );
 
-CREATE TABLE services_notes (
+CREATE TABLE next_steps (
   id SERIAL PRIMARY KEY,
-  service_id INTEGER REFERENCES services(id),
-  notes VARCHAR,
-  timestamp VARCHAR NOT NULL
+  user_child_id INTEGER REFERENCES user_child(id),
+  child_next_steps VARCHAR
 );
+
+CREATE TABLE resources (
+  id SERIAL PRIMARY KEY,
+  user_child_id INTEGER REFERENCES user_child(id),
+  resources_link VARCHAR
+);
+
 
 INSERT INTO users_main (username, email, password_digest)
   VALUES ('prinsesa', 'princess@princess.com', '$2a$10$f17jjX0NASQWYOln23Ogk.ePXm0TpAs2oq.k4.YOGQGTnkOvZlD/O');
@@ -84,3 +90,9 @@ INSERT INTO authorized_users (auth_user_firstname, auth_user_lastname, email, re
 INSERT INTO services (user_child_id, organization, fullname, job_title, frequency, org_address, phone, website, service_category)
   VALUES (1, 'The Thrive Network', 'Chad Alexander', 'Medicaid Service Coordinator', 'by appointment', '241 37th St., Suite 604 Brooklyn, NY 11232', '(718) 965-1998', 'www.thethrivenetwork.org', 'medicaid/insurance'),
          (1, 'Marie Pense Center', 'Mildred Amarteifio', 'SETSS provider', '10 hours per week', '37 West 20th St., Suite 909, New York, NY 10011', '(212) 362-7013', 'mpcny.org', 'in-home');
+
+INSERT INTO next_steps (user_child_id, child_next_steps)       
+  VALUES (1, 'research high schools');
+
+INSERT INTO resources (user_child_id, resources_link)       
+  VALUES (1, 'https://www.ada.gov/');

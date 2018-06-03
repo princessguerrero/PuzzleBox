@@ -102,6 +102,24 @@ function addService(req, res, next) {
     });
 }
 
+// add a next step
+function addNextSteps(req, res, next) {
+  db
+    .none(
+      "INSERT INTO next_steps (user_child_id, child_next_steps) VALUES (${user_child_id}, ${child_next_steps})",
+      {
+        user_child_id: req.params.user_child_id,
+        child_next_steps: req.body.child_next_steps,
+      }
+    )
+    .then(() => {
+      res.status(200).send("added a next step into database");
+    })
+    .catch(err => {
+      console.log(`error adding service: `, err);
+    });
+}
+
 // add authorized user
 function addAuthorizedUser(req, res, next) {
   db
@@ -177,6 +195,25 @@ function getAllServices(req, res, next) {
         status: "success",
         data: data,
         message: "Retrieved all services"
+      });
+    })
+    .catch(err => {
+      return next(err);
+    });
+}
+
+// get all next steps
+function getAllNextSteps(req, res, next) {
+  db
+    .any("SELECT * FROM next_steps WHERE user_child_id=${user_child_id}", {
+      user_child_id: req.params.user_child_id
+    })
+    .then(data => {
+      console.log("data:", data);
+      res.status(200).json({
+        status: "success",
+        data: data,
+        message: "Retrieved all next steps"
       });
     })
     .catch(err => {
@@ -262,11 +299,13 @@ module.exports = {
   mainUserBio,
   addUserChild,
   addService,
+  addNextSteps,
   addAuthorizedUser,
   getMainUser,
   getMainUserBio,
   getAllMainUsers,
   getAllServices,
+  getAllNextSteps,
   getAllAuthorizedUsers,
   getUserChild,
   getAllChildren,
