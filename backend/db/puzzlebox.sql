@@ -71,7 +71,9 @@ CREATE TABLE next_steps (
 CREATE TABLE resources (
   id SERIAL PRIMARY KEY,
   user_child_id INTEGER REFERENCES user_child(id),
-  resources_link VARCHAR
+  resource_link VARCHAR,
+  resource_name VARCHAR,
+  resource_description VARCHAR
 );
 
 
@@ -94,5 +96,5 @@ INSERT INTO services (user_child_id, organization, fullname, job_title, frequenc
 INSERT INTO next_steps (user_child_id, child_next_steps)       
   VALUES (1, 'research high schools');
 
-INSERT INTO resources (user_child_id, resources_link)       
-  VALUES (1, 'https://www.ada.gov/');
+INSERT INTO resources (user_child_id, resource_link, resource_name, resource_description)       
+  VALUES (1, 'https://www.ada.gov/', 'American With Disabilities Act', 'Information and Technical Assistance');

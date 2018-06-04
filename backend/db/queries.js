@@ -124,10 +124,12 @@ function addNextSteps(req, res, next) {
 function addResource(req, res, next) {
   db
     .none(
-      "INSERT INTO resources (user_child_id, resources_link) VALUES (${user_child_id}, ${resources_link})",
+      "INSERT INTO resources (user_child_id, resource_link, resource_name, resource_description) VALUES (${user_child_id}, ${resource_link}, ${resource_name}, ${resource_description})",
       {
         user_child_id: req.params.user_child_id,
-        resources_link: req.body.resources_link
+        resource_link: req.body.resource_link,
+        resource_name: req.body.resource_name,
+        resource_description: req.body.resource_description
       }
     )
     .then(() => {

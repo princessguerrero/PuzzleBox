@@ -14,7 +14,9 @@ class Resources extends React.Component {
       id: this.props.id,
       oneChild: this.props.oneChild,
       allResources: [],
-      resources_link: "",
+      resource_link: "",
+      resource_name: "",
+      resource_description: "",
       addedResource: false
     };
   }
@@ -44,7 +46,7 @@ class Resources extends React.Component {
 
   handleInput = e => {
     this.setState({
-      resources_link: e.target.value
+      [e.target.name]: e.target.value
     });
   };
 
@@ -55,21 +57,25 @@ class Resources extends React.Component {
     axios
       .post(`/users/addResource/${this.state.id}`, {
         id: this.state.id,
-        resources_link: this.state.resources_link
+        resource_link: this.state.resource_link,
+        resource_name: this.state.resource_name,
+        resource_description: this.state.resource_description
       })
       .then(res => {
         console.log(res);
-        const { resources_link, allResources, id } = this.state;
+        const { resource_link, resource_name, resource_description, allResources, id } = this.state;
         const newResourceLink = {
           id: generateId(),
           user_child_id: id,
-          resources_link: resources_link
+          resource_link: resource_link,
+          resource_name: resource_name,
+          resource_description: resource_description
         };
         const holdAllResourcesLink = [...allResources, newResourceLink];
         this.setState({
           addedResource: true,
           allResources: holdAllResourcesLink,
-          resources_link: ""
+          resource_link: ""
         });
       })
       .catch(err => {
@@ -78,21 +84,40 @@ class Resources extends React.Component {
   };
 
   render() {
-    const { id, resources_link, addedResource, allResources } = this.state;
+    const { id, resource_link, resource_name, resource_description, addedResource, allResources } = this.state;
 
     return (
       <div>
         these are the resources for this child
-        <textarea
+        <form>
+        Enter Link:
+        <input
           type="text"
-          name="resources_link"
-          value={resources_link}
+          name="resource_link"
+          value={resource_link}
           onChange={this.handleInput}
         />
-        <button onClick={this.handleClickAddResource}>Add a Resource Link</button>
+        Enter Name:
+        <input
+          type="text"
+          name="resource_name"
+          value={resource_name}
+          onChange={this.handleInput}
+        />
+        Enter Description:
+        <input
+          type="text"
+          name="resource_description"
+          value={resource_description}
+          onChange={this.handleInput}
+        />
+        <input type="button" onClick={this.handleClickAddResource} value="Add Resource"/>
+        </form>
         <div>
-          {allResources.map(resource => {
-            return <li><a href={resource.resources_link}>{resource.resources_link}</a></li>
+          {allResources.map(obj => {
+            return <li><a href={obj.resource_link}>{obj.resource_link}</a>
+            Name: {obj.resource_name}
+            Description: {obj.resource_description}</li>
           })}
         </div>
       </div>
