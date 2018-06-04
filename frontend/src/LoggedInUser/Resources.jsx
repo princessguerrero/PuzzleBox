@@ -7,6 +7,15 @@ const generateId = () =>
     .toString(34)
     .slice(2);
 
+const is_url = str => {
+  const regexp = /^(?:(?:https?|ftp):\/\/)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/\S*)?$/;
+  if (regexp.test(str)) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
 class Resources extends React.Component {
   constructor(props) {
     super(props);
@@ -17,7 +26,8 @@ class Resources extends React.Component {
       resource_link: "",
       resource_name: "",
       resource_description: "",
-      addedResource: false
+      addedResource: false,
+      message: ""
     };
   }
 
@@ -52,8 +62,14 @@ class Resources extends React.Component {
 
   handleClickAddResource = e => {
     console.log("adding a resource link");
-    e.preventDefault();
+    e.preventDefault();    
     console.log("id", this.state.id);
+
+    if (!is_url(this.state.resource_link)) {
+        this.setState({
+            message: "please enter a valid url"
+        })
+    } else {
     axios
       .post(`/users/addResource/${this.state.id}`, {
         id: this.state.id,
@@ -63,7 +79,13 @@ class Resources extends React.Component {
       })
       .then(res => {
         console.log(res);
-        const { resource_link, resource_name, resource_description, allResources, id } = this.state;
+        const {
+          resource_link,
+          resource_name,
+          resource_description,
+          allResources,
+          id
+        } = this.state;
         const newResourceLink = {
           id: generateId(),
           user_child_id: id,
@@ -75,49 +97,69 @@ class Resources extends React.Component {
         this.setState({
           addedResource: true,
           allResources: holdAllResourcesLink,
-          resource_link: ""
+          resource_link: "",
+          resource_name: "",
+          resource_description: ""
         });
       })
       .catch(err => {
         console.log("err sending post req in resources", err);
       });
   };
-
+} 
   render() {
-    const { id, resource_link, resource_name, resource_description, addedResource, allResources } = this.state;
+    const {
+      id,
+      resource_link,
+      resource_name,
+      resource_description,
+      addedResource,
+      allResources,
+      message
+    } = this.state;
 
     return (
       <div>
         these are the resources for this child
         <form>
-        Enter Link:
-        <input
-          type="text"
-          name="resource_link"
-          value={resource_link}
-          onChange={this.handleInput}
-        />
-        Enter Name:
-        <input
-          type="text"
-          name="resource_name"
-          value={resource_name}
-          onChange={this.handleInput}
-        />
-        Enter Description:
-        <input
-          type="text"
-          name="resource_description"
-          value={resource_description}
-          onChange={this.handleInput}
-        />
-        <input type="button" onClick={this.handleClickAddResource} value="Add Resource"/>
+          Enter Link:
+          <input
+            type="text"
+            name="resource_link"
+            target="_blank"
+            value={resource_link}
+            onChange={this.handleInput}
+          />
+          Enter Name:
+          <input
+            type="text"
+            name="resource_name"
+            value={resource_name}
+            onChange={this.handleInput}
+          />
+          Enter Description:
+          <input
+            type="text"
+            name="resource_description"
+            value={resource_description}
+            onChange={this.handleInput}
+          />
+          <input
+            type="button"
+            onClick={this.handleClickAddResource}
+            value="Add Resource"
+          />
         </form>
+        {message}
         <div>
           {allResources.map(obj => {
-            return <li><a href={obj.resource_link}>{obj.resource_link}</a>
-            Name: {obj.resource_name}
-            Description: {obj.resource_description}</li>
+            return (
+              <li>
+                <a href={obj.resource_link}>{obj.resource_link}</a>
+                Name: {obj.resource_name}
+                Description: {obj.resource_description}
+              </li>
+            );
           })}
         </div>
       </div>
