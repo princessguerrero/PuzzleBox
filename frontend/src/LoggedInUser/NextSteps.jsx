@@ -69,7 +69,7 @@ class NextSteps extends React.Component {
         });
       })
       .catch(err => {
-        console.log("err sending post req in services", err);
+        console.log("err sending post req in next steps", err);
       });
   };
 

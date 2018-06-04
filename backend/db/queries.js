@@ -109,7 +109,7 @@ function addNextSteps(req, res, next) {
       "INSERT INTO next_steps (user_child_id, child_next_steps) VALUES (${user_child_id}, ${child_next_steps})",
       {
         user_child_id: req.params.user_child_id,
-        child_next_steps: req.body.child_next_steps,
+        child_next_steps: req.body.child_next_steps
       }
     )
     .then(() => {
@@ -117,6 +117,24 @@ function addNextSteps(req, res, next) {
     })
     .catch(err => {
       console.log(`error adding service: `, err);
+    });
+}
+
+// add a resource link
+function addResource(req, res, next) {
+  db
+    .none(
+      "INSERT INTO resources (user_child_id, resources_link) VALUES (${user_child_id}, ${resources_link})",
+      {
+        user_child_id: req.params.user_child_id,
+        resources_link: req.body.resources_link
+      }
+    )
+    .then(() => {
+      res.status(200).send("added a resource into database");
+    })
+    .catch(err => {
+      console.log(`error adding a resource link: `, err);
     });
 }
 
@@ -158,9 +176,12 @@ function getMainUser(req, res, next) {
 // get main user bio
 function getMainUserBio(req, res, next) {
   db
-    .one("SELECT first_name, last_name, relationship, pic, notes FROM users_main_bio WHERE username=${username}", {
-      username: req.params.username
-    })
+    .one(
+      "SELECT first_name, last_name, relationship, pic, notes FROM users_main_bio WHERE username=${username}",
+      {
+        username: req.params.username
+      }
+    )
     .then(data => {
       res.status(200).json({ user: data });
     });
@@ -214,6 +235,25 @@ function getAllNextSteps(req, res, next) {
         status: "success",
         data: data,
         message: "Retrieved all next steps"
+      });
+    })
+    .catch(err => {
+      return next(err);
+    });
+}
+
+// get all Resources
+function getAllResources(req, res, next) {
+  db
+    .any("SELECT * FROM resources WHERE user_child_id=${user_child_id}", {
+      user_child_id: req.params.user_child_id
+    })
+    .then(data => {
+      console.log("data:", data);
+      res.status(200).json({
+        status: "success",
+        data: data,
+        message: "Retrieved all resources"
       });
     })
     .catch(err => {
@@ -300,12 +340,14 @@ module.exports = {
   addUserChild,
   addService,
   addNextSteps,
+  addResource,
   addAuthorizedUser,
   getMainUser,
   getMainUserBio,
   getAllMainUsers,
   getAllServices,
   getAllNextSteps,
+  getAllResources,
   getAllAuthorizedUsers,
   getUserChild,
   getAllChildren,

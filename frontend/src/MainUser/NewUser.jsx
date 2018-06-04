@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Link, Redirect } from "react-router-dom";
+import "../Stylesheets/Login.css";
 
 class NewUser extends React.Component {
   constructor() {

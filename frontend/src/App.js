@@ -12,6 +12,9 @@ import ChildrenList from "./LoggedInUser/ChildrenList";
 import ChildPage from "./LoggedInUser/ChildPage";
 import MainUserProfile from "./LoggedInUser/MainUserProfile";
 import AddService from "./LoggedInUser/AddService";
+import "./Stylesheets/Login.css";
+import "./Stylesheets/Navbar.css";
+import 'semantic-ui-css/semantic.min.css';
 
 class App extends Component {
   constructor() {
@@ -160,12 +163,15 @@ class App extends Component {
     console.log("app", this.state);
     return (
       <div>
+        <div className="top-nav-bar">
+        <div>
         {user ? (
           <Link to="/users/childrenlist">puzzlebox</Link>
         ) : (
           <Link to="/users">puzzlebox</Link>
         )}
-        <div>
+        </div>
+        <div className="top-navbar-right">
           {/* {user ? "" : <Link to="/users">Register</Link>}
           {"  "}
           {"  "}
@@ -181,7 +187,7 @@ class App extends Component {
           )}
         {"  "}
           {user ? <Link to="/users/logout"><span><i class="fas fa-sign-out-alt"></i></span></Link> : ""}
-         
+         </div>
         </div>
         <div>
           <Switch>

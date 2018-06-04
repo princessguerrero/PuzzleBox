@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import axios from "axios";
 import { Redirect } from "react-router";
 import { Link } from "react-router-dom";
+import "../Stylesheets/Login.css";
+import { Form, Button, Header, Message } from "semantic-ui-react";
 
 class LoginUser extends React.Component {
   constructor() {
@@ -68,8 +70,9 @@ class LoginUser extends React.Component {
     return (
       <div className="login-user-container">
         <div className="login-box">
-          <form onSubmit={this.submitForm}>
-            <input
+          <Form onSubmit={this.submitForm}>
+          <div>Username</div>
+            <Form.Input
               className="usernameBox"
               placeholder="Username"
               type="text"
@@ -79,7 +82,8 @@ class LoginUser extends React.Component {
               required
             />
             <br/>
-            <input
+            <div>Password</div>
+            <Form.Input
               className="passwordBox"
               placeholder="Password"
               type="password"
@@ -88,18 +92,20 @@ class LoginUser extends React.Component {
               onChange={this.handleInput}
               required
             />
-            <input className="loginBtn" type="submit" value="Log in" />
-          </form>
+            <div>
+            <Button className="loginBtn" type="submit" value="Log in" content="Login"/></div>
+            <Message className='smaller-box'>
+            Don't have an account?<Link to="/users"> Sign up!</Link>
+        </Message> {/* End smaller-box */}
+          </Form>
 
 
         </div> {/* End login-box */}
 
-        <div className='smaller-box'>
-            Don't have an account?<Link to="/users"> Sign up!</Link>
-        </div> {/* End smaller-box */}
+       
 
         { message
-          ? <div className="login-error-message">{message}</div>
+          ? <div className="message-size">{message}</div>
           : <span></span>
         }
       </div>

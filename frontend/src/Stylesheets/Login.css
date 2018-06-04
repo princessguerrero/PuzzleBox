@@ -1,0 +1,82 @@
+/* .login-user-container {
+    background-color: #fff;
+    width: 100%;
+    padding-top: 10px;
+    border: 1px solid #eaeaea;
+    border-radius: 5px;
+    margin: auto;
+    height: 300px;
+} */
+
+html {
+    height: 100%;
+}
+
+body {
+    /* background-color:#8d94ba; */
+    background: linear-gradient(-60.76deg,#9679ff 0,#d499ea 57.96%,#eea4b3 100%) !important;
+    background-repeat: no-repeat;
+    height: 100%;
+    margin: 0;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+
+.login-box,
+.register-box {
+  text-align: center;
+  width: 350px;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  background-color: #fff;
+  border: 1px solid #e6e6e6;
+  border-radius: 1px;
+  margin: 0 auto;
+  padding: 10px 0;
+}
+
+.smaller-box {
+    text-align: center;
+    /* width: 22.25%; */
+    width: 300px;
+    background-color: #fff;
+    border: 1px solid #e6e6e6;
+    /* border-radius: 1px; */
+    /* margin-left: 38.4%; */
+    top: 10px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .message-size {
+  color: #000;
+  font-size: 16px;
+  text-align: center;
+  border-radius: 5px;
+  background-color: #e6e6fa;
+  opacity: 0.8;
+  padding: 10px;
+  margin: 0 auto;
+  width: fit-content;
+  }
+
+  /* .message-size{
+    font-size: 12px;
+    color: #262626;
+    text-align: center;
+  } */
+
+/* .smaller-box,
+.login-error-message {
+  color: #000;
+  font-size: 16px;
+  text-align: center;
+  border-radius: 5px;
+  background-color: #e6e6fa;
+  opacity: 0.8;
+  padding: 10px;
+  margin: 0 auto;
+  width: fit-content;
+} */
