@@ -54,7 +54,7 @@ class ChildPage extends React.Component {
       <div>
         this is child's profile
         <div>
-          <i class="far fa-5x fa-user-circle" />
+    {oneChild.pic ? <img src={oneChild.pic} alt="child's photo" /> : <i class="far fa-5x fa-user-circle" /> }
         </div>
         <div>{oneChild.first_name}</div>
         <div>Age: {oneChild.age}</div>

@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Link, Redirect } from "react-router-dom";
-import "../Stylesheets/Login.css";
+import "../Stylesheets/NewUser.css";
+import { Form, Button, Header, Message } from "semantic-ui-react";
 
 class NewUser extends React.Component {
   constructor() {
@@ -67,30 +68,30 @@ class NewUser extends React.Component {
             })
             .then(res => {
               console.log(res.data);
-            //   this.props.setUser(res.data);
-            //   this.props.active();    
+              //   this.props.setUser(res.data);
+              //   this.props.active();
               this.setState({
                 message: "Registered user",
                 registered: true,
                 loggedIn: true
               });
             })
-            .then(() => { 
+            .then(() => {
               axios
-              .post("/users/login", {
-                username: username,
-                password: password
-              })
-              .then(res => {
-                console.log(res.data);
-                this.props.setUser(res.data);
-              //   this.props.active();
-                this.setState({
-                  username: "",
-                  password: "",
-                  loggedIn: true
+                .post("/users/login", {
+                  username: username,
+                  password: password
+                })
+                .then(res => {
+                  console.log(res.data);
+                  this.props.setUser(res.data);
+                  //   this.props.active();
+                  this.setState({
+                    username: "",
+                    password: "",
+                    loggedIn: true
+                  });
                 });
-              })
             })
             .catch(err => {
               console.log(err);
@@ -130,51 +131,63 @@ class NewUser extends React.Component {
       );
 
     return (
-      <div className="register-user-container">
+      <div>
         {/* nav bar goes here  */}
 
-        <h2 id="navLogoName"> Sign-up. </h2>
-        <div className="registerBox" className="registerBox">
-          <form onSubmit={this.submitForm} className="new-user-form">
-            <input
+        <div className="register-box">
+          <Form onSubmit={this.submitForm}>
+            <div className="signuptext">Sign up</div>
+           <div> Username </div>
+            <Form.Input
               className="usernameBox"
               placeholder="Username"
               type="text"
+              icon="user"
+              iconPosition="left"
               name="username"
               value={username}
               onChange={this.handleInput}
             />
-            <br/>
-            <input
+            <div>Email</div>
+            <Form.Input
               className="emailBox"
               placeholder="Email"
               type="email"
               name="email"
+              icon="mail"
+              iconPosition="left"
               value={email}
               onChange={this.handleInput}
             />
-            <br/>
-            <input
+            <div>Password</div>
+            <Form.Input
               className="passwordBox"
               placeholder="Password"
               type="password"
               name="password"
+              icon="lock"
+              iconPosition="left"
               value={password}
               onChange={this.handleInput}
             />
-            <br/>
-            <input
+            <div>
+            <Button
+              fluid
               className="loginBtn"
               type="submit"
-              value="Sign Up"
+              content="Sign Up"
+              inverted
+              color="violet"
               onClick={this.renderNewUserBio}
-            />
-          </form>
-          <div>
-            Already have an account?<Link to="/users/login"> Login</Link>
-        </div> {/* End smaller-box */}
+            /> </div>
+            <Message className="smaller-box">
+            <div className="errormessage">{message}</div>
+            
+              Already have an account?<Link to="/users/login"> Login</Link>
+            </Message>{" "}
+            {/* End smaller-box */}
+          </Form>
         </div>
-        {message}
       </div>
     );
   }

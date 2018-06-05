@@ -165,8 +165,8 @@ class App extends Component {
       <div>
         <div className="top-nav-bar">
         <div>
-        {user ? (
-          <Link to="/users/childrenlist">puzzlebox</Link>
+        {user ? (<div>
+          <Link to="/users/childrenlist" >puzzlebox</Link></div>
         ) : (
           <Link to="/users">puzzlebox</Link>
         )}

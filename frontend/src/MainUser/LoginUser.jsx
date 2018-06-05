@@ -70,32 +70,40 @@ class LoginUser extends React.Component {
     return (
       <div className="login-user-container">
         <div className="login-box">
-          <Form onSubmit={this.submitForm}>
+          <Form onSubmit={this.submitForm} >
+          <div className="logintext">Log In </div>
           <div>Username</div>
             <Form.Input
               className="usernameBox"
               placeholder="Username"
               type="text"
               name="usernameInput"
+              icon="user"
+              iconPosition="left"
               value={usernameInput}
               onChange={this.handleInput}
               required
             />
-            <br/>
             <div>Password</div>
             <Form.Input
               className="passwordBox"
               placeholder="Password"
               type="password"
               name="passwordInput"
+              icon="lock"
+              iconPosition="left"
               value={passwordInput}
               onChange={this.handleInput}
               required
             />
             <div>
-            <Button className="loginBtn" type="submit" value="Log in" content="Login"/></div>
-            <Message className='smaller-box'>
-            Don't have an account?<Link to="/users"> Sign up!</Link>
+            <Button fluid inverted color="violet" type="submit" value="Log in" content="Login"/></div>
+             <Message className='smaller-box'>
+             { message
+          ? <div className="errormessage">{message}</div>
+          : <span>{message}</span>
+        }
+            Don't have an account?<Link to="/users">  Sign up!</Link>
         </Message> {/* End smaller-box */}
           </Form>
 
@@ -104,10 +112,7 @@ class LoginUser extends React.Component {
 
        
 
-        { message
-          ? <div className="message-size">{message}</div>
-          : <span></span>
-        }
+        
       </div>
     );
   }

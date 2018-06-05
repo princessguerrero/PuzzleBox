@@ -1,23 +1,35 @@
 .top-nav-bar {
-    /* background-color: rgb(66, 163, 253); */
-    height: 80px;
-    padding: 1em;
-    opacity: 0.9;
-    font-size: 18px;
-    display: flex;
-    flex-wrap: nowrap;
-    align-items: center;
-    flex-direction: row;
-    border-bottom: 10px solid #E6E6FA;
-  }
+  /* background-color: rgb(66, 163, 253); */
+  height: 80px;
+  padding: 1em;
+  opacity: 0.9;
+  font-size: 18px;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  flex-direction: row;
+  border-bottom: 10px solid #e6e6fa;
+}
 
-.top-nav-bar a{
-    text-decoration: none;
-    font-size: 40px;
-    font-weight: bold;
-    /* font-family: 'Cinzel', serif; */
+/* #puzzleboxloggedin {
+  display: flex;
+  justify-content: center;
+} */
+
+.top-nav-bar a {
+  text-decoration: none;
+  font-size: 40px;
+  font-weight: bold;
+  font-family: "Love Ya Like A Sister", cursive;
+  /* font-family: 'Cinzel', serif; */
 }
 
 .top-nav-bar-right {
-    margin-left: auto;
-  }
+  margin-left: auto;
+}
+
+.puzzleboxLoggedIn {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
