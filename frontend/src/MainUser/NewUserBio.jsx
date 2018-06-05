@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Link, Redirect } from "react-router-dom";
+import { Form, Button, Header, Message, TextArea } from "semantic-ui-react";
+import "../Stylesheets/NewUser.css";
 
 class NewUserBio extends React.Component {
   constructor(props) {
@@ -54,57 +56,55 @@ class NewUserBio extends React.Component {
       notes,
       submitted
     } = this.state;
-    console.log("new user bio", this.state)
+    console.log("new user bio", this.state);
 
     if (submitted) {
-        return <Redirect to="/users/childbio" />;
-      }
+      return <Redirect to="/users/childbio" />;
+    }
     return (
-      <div>
-        <p>New User Bio</p>
-        <form>
-          First Name:{"  "}
-          <input
+      <div className="newuserbio-container">
+      <div className="newuserbio-box">
+        <div className="newuserbio-text">New User Bio</div>
+        <Form>
+          <div>First Name:</div>
+          <Form.Input
             type="text"
             name="first_name"
             value={first_name}
             onChange={this.handleInput}
           />
-          <br />
-          Last Name:{"  "}
-          <input
+          <div>Last Name:</div>
+          <Form.Input
             type="text"
             name="last_name"
             value={last_name}
             onChange={this.handleInput}
           />
-          <br />
-          Relationship:{"  "}
-          <input
+          <div>Relationship:</div>
+          <Form.Input
             type="text"
             name="relationship"
             value={relationship}
             onChange={this.handleInput}
           />
-          <br />
-          Photo:{"  "}
-          <input
+          <div>Photo:</div>
+          <Form.Input
             type="text"
             name="pic"
             value={pic}
             onChange={this.handleInput}
             placeholder="URL"
           />
-          <br />
-          Notes:{"  "}
-          <textarea
+          <div>Notes:</div>
+          <Form.TextArea
             type="text"
             name="notes"
             value={notes}
             onChange={this.handleInput}
           />
-          <input type="submit" value="Submit" onClick={this.renderBio} />
-        </form>
+          <Button fluid content="Submit" type="submit" value="Submit" onClick={this.renderBio} />
+        </Form>
+      </div>
       </div>
     );
   }

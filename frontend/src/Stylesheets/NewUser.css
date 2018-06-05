@@ -1,38 +1,64 @@
 .register-box {
-    text-align: left;
-    width: 500px;
-    height: 450px;
-    display: flex;
-    justify-content: center;
-    background-color: #fff;
-    border: 1px solid #e6e6e6;
-    border-radius: 5px;
-    margin: 40px auto;
-    /* padding: 10px 0; */
-  }
+  text-align: left;
+  width: 500px;
+  height: 450px;
+  display: flex;
+  justify-content: center;
+  background-color: #fff;
+  border: 1px solid #e6e6e6;
+  border-radius: 5px;
+  margin: 40px auto;
+  /* padding: 10px 0; */
+}
 
-  .errormessage {
-    color: red;
+.errormessage {
+  color: red;
 }
 
 .signuptext {
-    font-size: 32px;
-    font-weight: bold;
-    text-align: left;
-    display: flex;
-    padding-top: 40px;
-    padding-bottom: 20px;
+  font-size: 32px;
+  font-weight: bold;
+  text-align: left;
+  display: flex;
+  padding-top: 40px;
+  padding-bottom: 20px;
 }
 
 .smaller-box {
-    text-align: center;
-    /* width: 22.25%; */
-    width: 300px;
-    background-color: #fff;
-    border: 1px solid #e6e6e6;
-    /* border-radius: 1px; */
-    /* margin-left: 38.4%; */
-    top: 10px;
+  text-align: center;
+  /* width: 22.25%; */
+  width: 300px;
+  background-color: #fff;
+  border: 1px solid #e6e6e6;
+  /* border-radius: 1px; */
+  /* margin-left: 38.4%; */
+  top: 10px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.newuserbio-container {
+    text-align: left;
+    width: 500px;
+    height: 525px;
+    display: flex;
+    justify-content: center;
+    background-color: transparent;
+    border: 4px solid #e6e6e6;
+    border-radius: 5px;
+    margin: 40px auto;
+}
+
+.newuserbio-box {
+    width: 400px;
+    height: 700px;
     margin: 0 auto;
-    position: relative;
-  }
+}
+
+.newuserbio-text {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    /* font-family: 'Didact Gothic', sans-serif; */
+    font-size: 24px;
+    font-weight: bold;
+}
