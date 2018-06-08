@@ -1,0 +1,9 @@
+.userprofilecard {
+    display: flex;
+    justify-content: center;
+    margin: 20px auto;
+}
+
+.imagesize {
+    height: 250px;
+}

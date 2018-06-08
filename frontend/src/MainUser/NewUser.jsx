@@ -133,7 +133,7 @@ class NewUser extends React.Component {
     return (
       <div>
         {/* nav bar goes here  */}
-
+        <div className="main-text">Helping special needs caregivers get organized.</div>
         <div className="register-box">
           <Form onSubmit={this.submitForm}>
             <div className="signuptext">Sign up</div>

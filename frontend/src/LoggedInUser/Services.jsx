@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Route, Link, Switch, Redirect } from "react-router-dom";
+import { Form, Input, Button } from "semantic-ui-react";
+import { Icon, Label, Menu, Table } from "semantic-ui-react";
 
 class Services extends React.Component {
   constructor(props) {
@@ -40,12 +42,44 @@ class Services extends React.Component {
     console.log("this is services", this.state);
     return (
       <div>
-        <p>Here you can view and add service providers.</p>
-       {allServices.map(service => {
-           return <div>{service.fullname}, {service.job_title} Frequency: {service.frequency}
-           </div>
-       })}
-       <button onClick={this.props.handleClickAddService}>Add Service</button>
+        <div>View or add service providers.</div>
+        <Button
+          onClick={this.props.handleClickAddService}
+          content="Add a Service"
+        />
+        <Table celled padded>
+          <Table.Header>
+            <Table.Row>
+              <Table.HeaderCell>Fullname</Table.HeaderCell>
+              <Table.HeaderCell>Job Title</Table.HeaderCell>
+              <Table.HeaderCell>Frequency</Table.HeaderCell>
+              <Table.HeaderCell>Category</Table.HeaderCell>
+              <Table.HeaderCell>Organization</Table.HeaderCell>
+              <Table.HeaderCell>Address</Table.HeaderCell>
+              <Table.HeaderCell>Phone</Table.HeaderCell>
+              <Table.HeaderCell>Website</Table.HeaderCell>
+            </Table.Row>
+          </Table.Header>
+          <Table.Body>
+            {allServices.map(service => {
+              return (
+                <Table.Row>
+                  <Table.Cell>{service.fullname}</Table.Cell>
+                  <Table.Cell>{service.job_title} </Table.Cell>
+                  <Table.Cell>{service.frequency} </Table.Cell>
+                  <Table.Cell>{service.service_category} </Table.Cell>
+                  <Table.Cell>{service.organization}</Table.Cell>
+                  <Table.Cell>{service.org_address} </Table.Cell>
+                  <Table.Cell>{service.phone} </Table.Cell>
+                  <Table.Cell>
+                    <a href={service.website} />
+                    {service.website}
+                  </Table.Cell>
+                </Table.Row>
+              );
+            })}
+          </Table.Body>
+        </Table>
       </div>
     );
   }

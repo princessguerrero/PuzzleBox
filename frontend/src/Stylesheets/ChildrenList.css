@@ -1,0 +1,34 @@
+.imagesize {
+    height: 250px;
+    width: 300px;
+}
+
+.imagetext {
+    font-size: 1.4em;
+    text-align: center;
+}
+
+.pagetitle {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 24px;
+    text-align: center;
+}
+
+button.ui.teal.inverted.button {
+    /* padding-bottom: 30px; */
+    width: 15%;
+    margin: 0 auto;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+    /* margin: 0 auto;
+    text-align: center; */
+}
+
+
+.buttontitlediv {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}

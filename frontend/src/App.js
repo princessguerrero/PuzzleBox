@@ -14,7 +14,7 @@ import MainUserProfile from "./LoggedInUser/MainUserProfile";
 import AddService from "./LoggedInUser/AddService";
 import "./Stylesheets/Login.css";
 import "./Stylesheets/Navbar.css";
-import 'semantic-ui-css/semantic.min.css';
+import "semantic-ui-css/semantic.min.css";
 
 class App extends Component {
   constructor() {
@@ -111,10 +111,10 @@ class App extends Component {
 
   renderNewUserBio = () => {
     const { user, active } = this.state;
-    return <NewUserBio setUser={this.setUser}
-    user={user}
-    active={this.isActive} />
-  }
+    return (
+      <NewUserBio setUser={this.setUser} user={user} active={this.isActive} />
+    );
+  };
 
   renderChildrenList = () => {
     const { user, active, username } = this.state;
@@ -145,18 +145,23 @@ class App extends Component {
 
   renderMainUserProfile = () => {
     const { user, active, username } = this.state;
-    console.log("mainuserprof", this.state)
+    console.log("mainuserprof", this.state);
     return (
-      <MainUserProfile user={user} username={username} active={this.isActive}/>
-    )
-  }
+      <MainUserProfile user={user} username={username} active={this.isActive} />
+    );
+  };
 
   renderAddService = routeProps => {
     const { user, active, username } = this.state;
     return (
-      <AddService user={user} username={username} active={this.isActive} id={routeProps.match.params.id} />
-    )
-  }
+      <AddService
+        user={user}
+        username={username}
+        active={this.isActive}
+        id={routeProps.match.params.id}
+      />
+    );
+  };
 
   render() {
     const { user, active, username, loggedIn } = this.state;
@@ -164,40 +169,59 @@ class App extends Component {
     return (
       <div>
         <div className="top-nav-bar">
-        <div>
-        {user ? (<div>
-          <Link to="/users/childrenlist" >puzzlebox</Link></div>
-        ) : (
-          <Link to="/users">puzzlebox</Link>
-        )}
-        </div>
-        <div className="top-navbar-right">
-          {/* {user ? "" : <Link to="/users">Register</Link>}
+          <div>
+            {user ? (
+              <div>
+                <Link to="/users/childrenlist">PuzzleBox</Link>
+              </div>
+            ) : (
+              <Link to="/users">PuzzleBox</Link>
+            )}
+          </div>
+          <div className="top-nav-bar-right">
+            {/* {user ? "" : <Link to="/users">Register</Link>}
           {"  "}
           {"  "}
           {user ? "" : <Link to="/users/login">Login</Link>}{"  "}{"  "} */}
-          {user ? (
-            <Link to="/users/mainuserprofile">
-              <span>
-                <i class="far fa-lg fa-user" />
-              </span>
-            </Link>
-          ) : (
-            ""
-          )}
-        {"  "}
-          {user ? <Link to="/users/logout"><span><i class="fas fa-sign-out-alt"></i></span></Link> : ""}
-         </div>
+            {user ? (
+              <Link to="/users/mainuserprofile">
+                <span >
+                  <i class="far fa-sm fa-user" />
+                </span>
+              </Link>
+            ) : (
+              ""
+            )}
+            {"  "}
+            {user ? (
+              <Link to="/users/logout">
+                <span>
+                  <i class="fas fa-sm fa-sign-out-alt" />
+                </span>
+              </Link>
+            ) : (
+              ""
+            )}
+          </div>
         </div>
         <div>
           <Switch>
             <Route exact path="/users" render={this.renderNewUser} />
             <Route exact path="/users/login" render={this.renderLogin} />
             <Route path="/users/logout" render={this.renderLogoutUser} />
-            <Route path="/users/signup/newuserbio" render={this.renderNewUserBio} />
+            <Route
+              path="/users/signup/newuserbio"
+              render={this.renderNewUserBio}
+            />
             <Route path="/users/childbio" render={this.renderChildBio} />
-            <Route path="/users/mainuserprofile" render={this.renderMainUserProfile} />
-            <Route path="/users/child/:id/service/add" render={this.renderAddService} />
+            <Route
+              path="/users/mainuserprofile"
+              render={this.renderMainUserProfile}
+            />
+            <Route
+              path="/users/child/:id/service/add"
+              render={this.renderAddService}
+            />
             <Route
               path="/users/childrenlist"
               render={this.renderChildrenList}

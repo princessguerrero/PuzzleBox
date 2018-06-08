@@ -26,10 +26,22 @@
 
 .top-nav-bar-right {
   margin-left: auto;
+  width: 10%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.top-nav-bar-right > a{
+    margin: 0 3%;
+    width: 20%;
 }
 
 .puzzleboxLoggedIn {
   width: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
+}
+
+.right-icon {
+    margin-right: 20px;
 }

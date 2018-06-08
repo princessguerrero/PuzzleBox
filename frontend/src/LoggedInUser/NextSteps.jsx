@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Route, Link, Switch, Redirect } from "react-router-dom";
+import { Form, Button } from 'semantic-ui-react';
+import "../Stylesheets/NextSteps.css";
 
 const generateId = () =>
   Math.random()
@@ -74,21 +76,24 @@ class NextSteps extends React.Component {
   };
 
   render() {
-    const { id, child_next_steps, addedNextSteps, allNextSteps } = this.state;
+    const { id, child_next_steps, addedNextSteps, allNextSteps, oneChild } = this.state;
     console.log("child next steps", this.state)
     return (
       <div>
-        these are the next steps for this child (todo's)
-        <textarea
+        <div className="next-steps-inst">Please type the next steps for {oneChild.first_name}</div>
+        <Form>
+        <Form.Input
+        className="inputfield-box"
           type="text"
           name="child_next_steps"
           value={child_next_steps}
           onChange={this.handleInput}
         />
-        <button onClick={this.handleClickAddNextSteps}>Add a Next Step</button>
+        <Button inverted color="violet" onClick={this.handleClickAddNextSteps} content="Add a Next Step"></Button>
+        </Form>
         <div>
             {allNextSteps.map(step => {
-                return <li>{step.child_next_steps}</li>
+                return <li className="list-items">{step.child_next_steps}</li>
             })}
         </div>
       </div>

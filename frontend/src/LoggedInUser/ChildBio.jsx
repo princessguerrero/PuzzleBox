@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Link, Redirect } from "react-router-dom";
+import { Form, Button, Header, Message, TextArea } from "semantic-ui-react";
+import "../Stylesheets/ChildBio.css";
 
 class ChildBio extends React.Component {
   constructor(props) {
@@ -32,7 +34,7 @@ class ChildBio extends React.Component {
   renderAddChild = e => {
     console.log("adding a child");
     e.preventDefault();
-    console.log("admin user", this.state.admin_username)
+    console.log("admin user", this.state.admin_username);
     axios
       .post("/users/addChildInfo", {
         admin_username: this.state.admin_username,
@@ -88,104 +90,111 @@ class ChildBio extends React.Component {
       );
 
     return (
-      <div>
-        <div> Hello {admin_username} </div>
-        this is childbio.jsx
-        <form>
-          First Name:{"  "}
-          <input
-            type="text"
-            name="first_name"
-            value={first_name}
-            onChange={this.handleInput}
-          />
-          <br />
-          Last Name:{"  "}
-          <input
-            type="text"
-            name="last_name"
-            value={last_name}
-            onChange={this.handleInput}
-          />
-          <br />
-          Date of Birth:{"  "}
-          <input
-            type="text"
-            name="date_of_birth"
-            value={date_of_birth}
-            onChange={this.handleInput}
-          />
-          <br />
-          Age: {"  "}
-          <input
-            type="text"
-            name="age"
-            value={age}
-            onChange={this.handleInput}
-          />
-          <br />
-          Photo:{"  "}
-          <input
-            type="text"
-            name="pic"
-            value={pic}
-            onChange={this.handleInput}
-            placeholder="URL"
-          />
-          <br />
-          School:{"  "}
-          <input
-            type="text"
-            name="school"
-            value={school}
-            onChange={this.handleInput}
-          />
-          <br />
-          Grade:{"  "}
-          <input
-            type="text"
-            name="grade"
-            value={grade}
-            onChange={this.handleInput}
-          />
-          <br />
-          Class size:{"  "}
-          <input
-            type="text"
-            name="class_size"
-            value={class_size}
-            onChange={this.handleInput}
-          />
-          <br />
-          Medical Condition/Diagnosis:{"  "}
-          <input
-            type="text"
-            name="diagnosis"
-            value={diagnosis}
-            onChange={this.handleInput}
-          />
-          <br />
-          Likes:{"  "}
-          <textarea
-            type="text"
-            name="likes"
-            value={likes}
-            onChange={this.handleInput}
-          />
-          <br />
-          Dislikes:{"  "}
-          <textarea
-            type="text"
-            name="dislikes"
-            value={dislikes}
-            onChange={this.handleInput}
-          />
-          <input
-            type="submit"
-            value="Add Child"
-            onClick={this.renderAddChild}
-          />
-        </form>
+      <div className="childbio-container">
+        <div className="childbio-box">
+          <div className="childbio-text"> Hello {admin_username} </div>
+          <div className="childbio-subtext">
+            Please fill-out the form below to add a child.
+          </div>
+          <Form size="small" className="formspecs">
+            <Form.Group widths="equal">
+              <Form.Field>
+              <Form.Input
+              label="First Name:"
+                type="text"
+                name="first_name"
+                value={first_name}
+                onChange={this.handleInput}
+              />
+              </Form.Field>
+              <Form.Input
+              label="Last Name:"
+                type="text"
+                name="last_name"
+                value={last_name}
+                onChange={this.handleInput}
+              />
+              <Form.Input
+              label="Date of Birth:"
+                type="text"
+                name="date_of_birth"
+                value={date_of_birth}
+                onChange={this.handleInput}
+              />
+            </Form.Group>
+            <Form.Group widths="equal">
+              <Form.Input
+              label="Age:"
+                type="text"
+                name="age"
+                value={age}
+                onChange={this.handleInput}
+              />
+              <Form.Input
+              label="Photo:"
+                type="text"
+                name="pic"
+                value={pic}
+                onChange={this.handleInput}
+                placeholder="URL"
+              />
+              <Form.Input
+              label="School:"
+                type="text"
+                name="school"
+                value={school}
+                onChange={this.handleInput}
+              />
+            </Form.Group>
+
+            <Form.Group widths="equal">
+              <Form.Input
+              label="Grade:"
+                type="text"
+                name="grade"
+                value={grade}
+                onChange={this.handleInput}
+              />
+              <Form.Input
+              label="Class size:"
+                type="text"
+                name="class_size"
+                value={class_size}
+                onChange={this.handleInput}
+              />
+              <Form.Input
+              label="Medical Condition/Diagnosis:"
+                type="text"
+                name="diagnosis"
+                value={diagnosis}
+                onChange={this.handleInput}
+              />
+            </Form.Group>
+
+            <Form.TextArea
+            label="Likes:"
+              type="text"
+              name="likes"
+              value={likes}
+              onChange={this.handleInput}
+            />
+            <Form.TextArea
+            label="Dislikes:"
+              type="text"
+              name="dislikes"
+              value={dislikes}
+              onChange={this.handleInput}
+            />
+            <Button
+              fluid
+              inverted color="yellow"
+              type="submit"
+              value="Add Child"
+              content="Add Child"
+              onClick={this.renderAddChild}
+            />
+          </Form>
+        </div>
       </div>
     );
   }

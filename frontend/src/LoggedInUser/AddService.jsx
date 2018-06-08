@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Link, Redirect } from "react-router-dom";
+import { Form, Button } from "semantic-ui-react";
+import "../Stylesheets/AddService.css";
 
 class AddService extends React.Component {
   constructor(props) {
@@ -25,9 +27,9 @@ class AddService extends React.Component {
     });
   };
 
-  handleChange = e => {
+  handleChange = (e, { service_category }) => {
     this.setState({
-      service_category: e.target.value
+      service_category
     });
   };
 
@@ -71,126 +73,111 @@ class AddService extends React.Component {
       service_category,
       addedService
     } = this.state;
-    
+
     if (addedService)
+      return (
+        <Redirect
+          to={{
+            pathname: `/users/child/${id}/profile`,
+            state: { referrer: this.state.username }
+          }}
+        />
+      );
     return (
-      <Redirect
-        to={{
-          pathname: `/users/child/${id}/profile`,
-          state: { referrer: this.state.username }
-        }}
-      />
-    );
-    return (
-      <div>
-        This is where you add a service. So make a form.
-        <form>
-          Full Name:
-          <input
+      <div className="addservice-box">
+       
+        <Form className="formbox">
+        <div className="addservice-text">Please fill-out the form to add a service provider.</div>
+          <Form.Input
+            label="Full Name:"
             type="text"
             name="fullname"
             value={fullname}
             onChange={this.handleInput}
           />
-          <br />
-          Job Title:
-          <input
+          <Form.Input
+            label="Job Title:"
             type="text"
             name="job_title"
             value={job_title}
             onChange={this.handleInput}
           />
-          <br />
-          Frequency
-          <input
+          <Form.Input
+            label="Frequency"
             type="text"
             name="frequency"
             value={frequency}
             onChange={this.handleInput}
           />
-          <br />
-          Organization:
-          <input
+          <Form.Input
+            label="Organization"
             type="text"
             name="organization"
             value={organization}
             onChange={this.handleInput}
           />
-          <br />
-          Organization Address:
-          <input
+          <Form.Input
+            label="Organization Address:"
             type="text"
             name="org_address"
             value={org_address}
             onChange={this.handleInput}
           />
-          <br />
-          Phone:
-          <input
+          <Form.Input
+            label="Phone:"
             type="text"
             name="phone"
             value={phone}
             onChange={this.handleInput}
           />
-          <br />
-          Website:
-          <input
+          <Form.Input
+            label="Website:"
             type="text"
             name="website"
             value={website}
             onChange={this.handleInput}
           />
-          <br />
-          Service Type:
-          <div>
-          <label>
-            in-home
-            <input
-              type="radio"
-              name="service_category"
+          <label>Service Type:</label>
+          <Form.Group inline>
+            <Form.Radio
+              label="in-home"
+              service_category="in-home"
               value="in-home"
               checked={this.state.service_category === "in-home"}
               onChange={this.handleChange}
             />
-          </label>
-          <label>
-            in-school
-            <input
-              type="radio"
-              name="service_category"
+            <Form.Radio
+              label="in-school"
               value="in-school"
+              service_category="in-school"
               checked={this.state.service_category === "in-school"}
               onChange={this.handleChange}
             />
-          </label>
-          </div>
-          <label>
-            medical
-            <input
-              type="radio"
-              name="service_category"
+          </Form.Group>
+          <Form.Group inline>
+            <Form.Radio
+              label="medical"
+              service_category="medical"
               value="medical"
               checked={this.state.service_category === "medical"}
               onChange={this.handleChange}
             />
-          </label>
-          <label>
-            medicaid/insurance
-            <input
-              type="radio"
-              name="service_category"
+            <Form.Radio
+              label="Medicaid/Insurance"
               value="medicaid/insurance"
+              service_category="medicaid/insurance"
               checked={this.state.service_category === "medicaid/insurance"}
               onChange={this.handleChange}
             />
-          </label>
-          <br />
-          <input
+          </Form.Group>
+          <Button
+          fluid
             type="submit"
             value="Add Service"
+            content="Add Service"
             onClick={this.renderAddService}
           />
-        </form>
+        </Form>
       </div>
     );
   }

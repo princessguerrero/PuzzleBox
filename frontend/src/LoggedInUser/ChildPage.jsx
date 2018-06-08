@@ -8,6 +8,8 @@ import Services from "./Services";
 import Contacts from "./Contacts";
 import NextSteps from "./NextSteps";
 import Resources from "./Resources";
+import "../Stylesheets/ChildPage.css";
+import { Image, List } from "semantic-ui-react";
 
 class ChildPage extends React.Component {
   constructor(props) {
@@ -41,7 +43,7 @@ class ChildPage extends React.Component {
     this.getOneChild();
   }
 
-  handleClickAddService  = e => {
+  handleClickAddService = e => {
     e.preventDefault();
     const { id } = this.state;
     return (window.location.href = `http://localhost:3000/users/child/${id}/service/add`);
@@ -52,38 +54,65 @@ class ChildPage extends React.Component {
     console.log("child in profile", oneChild);
     return (
       <div>
-        this is child's profile
-        <div>
-    {oneChild.pic ? <img src={oneChild.pic} alt="child's photo" /> : <i class="far fa-5x fa-user-circle" /> }
+        <div className="blurb">
+          <div className="img-container">
+            {oneChild.pic ? (
+              <img
+                src={oneChild.pic}
+                alt="child's photo"
+                className="profile-pic"
+              />
+            ) : (
+              <i class="far fa-5x fa-user-circle" />
+            )}
+          </div>
+          <div className="general-info">
+            <div className="my-name">{oneChild.first_name}</div>
+            <div className="my-age">Age: {oneChild.age}</div>
+          </div>
         </div>
-        <div>{oneChild.first_name}</div>
-        <div>Age: {oneChild.age}</div>
-        <Tabs>
-          <TabList>
-            <Tab>About</Tab>
-            <Tab>Services</Tab>
-            <Tab>Next Steps</Tab>
-            <Tab>Resources</Tab>
+        <Tabs className="tabs">
+          <TabList className="tab-list">
+            <Tab className="single-tab">About</Tab>
+            <Tab className="single-tab">Services</Tab>
+            <Tab className="single-tab">Next Steps</Tab>
+            <Tab className="single-tab">Resources</Tab>
           </TabList>
 
-          <TabPanel>
-            <div>
-              Date of Birth: {oneChild.date_of_birth} <br />
-              Diagnosis: {oneChild.diagnosis}
-              <br />
-              School: {oneChild.school}
-              <br />
-              Grade Level: {oneChild.grade}
-              <br />
-              Class Size: {oneChild.class_size}
-              <br />
-              Likes: {oneChild.likes}
-              <br />
-              Dislikes: {oneChild.dislikes}
-              <br />
-            </div>
+          <TabPanel className="tab-panel">
+            <List>
+              <List.Item>
+                <List.Content>
+                  Date of Birth: {oneChild.date_of_birth}{" "}
+                </List.Content>
+              </List.Item>
+              <List.Item>
+                <List.Content>Diagnosis: {oneChild.diagnosis}</List.Content>
+              </List.Item>
+
+              <List.Item>
+                {" "}
+                <List.Content>School: {oneChild.school}</List.Content>
+              </List.Item>
+              <List.Item>
+                {" "}
+                <List.Content>Grade Level: {oneChild.grade}</List.Content>
+              </List.Item>
+              <List.Item>
+                {" "}
+                <List.Content>Class Size: {oneChild.class_size}</List.Content>
+              </List.Item>
+              <List.Item>
+                {" "}
+                <List.Content>Likes: {oneChild.likes}</List.Content>
+              </List.Item>
+              <List.Item>
+                {" "}
+                <List.Content>Dislikes: {oneChild.dislikes}</List.Content>
+              </List.Item>
+            </List>
           </TabPanel>
-          <TabPanel>
+          <TabPanel className="tab-panel">
             <Services
               admin_username={admin_username}
               oneChild={oneChild}
@@ -91,14 +120,14 @@ class ChildPage extends React.Component {
               handleClickAddService={this.handleClickAddService}
             />
           </TabPanel>
-          <TabPanel>
+          <TabPanel className="tab-panel">
             <NextSteps
               admin_username={admin_username}
               oneChild={oneChild}
               id={id}
             />
           </TabPanel>
-          <TabPanel>
+          <TabPanel className="tab-panel">
             <Resources
               admin_username={admin_username}
               oneChild={oneChild}

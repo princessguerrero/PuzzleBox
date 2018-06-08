@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Route, Link, Switch, Redirect } from "react-router-dom";
+import { Form, Input, Button } from "semantic-ui-react";
+import { Icon, Label, Menu, Table } from "semantic-ui-react";
 
 const generateId = () =>
   Math.random()
@@ -62,51 +64,51 @@ class Resources extends React.Component {
 
   handleClickAddResource = e => {
     console.log("adding a resource link");
-    e.preventDefault();    
+    e.preventDefault();
     console.log("id", this.state.id);
 
     if (!is_url(this.state.resource_link)) {
-        this.setState({
-            message: "please enter a valid url"
-        })
-    } else {
-    axios
-      .post(`/users/addResource/${this.state.id}`, {
-        id: this.state.id,
-        resource_link: this.state.resource_link,
-        resource_name: this.state.resource_name,
-        resource_description: this.state.resource_description
-      })
-      .then(res => {
-        console.log(res);
-        const {
-          resource_link,
-          resource_name,
-          resource_description,
-          allResources,
-          id
-        } = this.state;
-        const newResourceLink = {
-          id: generateId(),
-          user_child_id: id,
-          resource_link: resource_link,
-          resource_name: resource_name,
-          resource_description: resource_description
-        };
-        const holdAllResourcesLink = [...allResources, newResourceLink];
-        this.setState({
-          addedResource: true,
-          allResources: holdAllResourcesLink,
-          resource_link: "",
-          resource_name: "",
-          resource_description: ""
-        });
-      })
-      .catch(err => {
-        console.log("err sending post req in resources", err);
+      this.setState({
+        message: "please enter a valid url"
       });
+    } else {
+      axios
+        .post(`/users/addResource/${this.state.id}`, {
+          id: this.state.id,
+          resource_link: this.state.resource_link,
+          resource_name: this.state.resource_name,
+          resource_description: this.state.resource_description
+        })
+        .then(res => {
+          console.log(res);
+          const {
+            resource_link,
+            resource_name,
+            resource_description,
+            allResources,
+            id
+          } = this.state;
+          const newResourceLink = {
+            id: generateId(),
+            user_child_id: id,
+            resource_link: resource_link,
+            resource_name: resource_name,
+            resource_description: resource_description
+          };
+          const holdAllResourcesLink = [...allResources, newResourceLink];
+          this.setState({
+            addedResource: true,
+            allResources: holdAllResourcesLink,
+            resource_link: "",
+            resource_name: "",
+            resource_description: ""
+          });
+        })
+        .catch(err => {
+          console.log("err sending post req in resources", err);
+        });
+    }
   };
-} 
   render() {
     const {
       id,
@@ -115,53 +117,72 @@ class Resources extends React.Component {
       resource_description,
       addedResource,
       allResources,
-      message
+      message,
+      oneChild
     } = this.state;
 
     return (
       <div>
-        these are the resources for this child
-        <form>
-          Enter Link:
-          <input
-            type="text"
-            name="resource_link"
-            target="_blank"
-            value={resource_link}
-            onChange={this.handleInput}
-          />
-          Enter Name:
-          <input
-            type="text"
-            name="resource_name"
-            value={resource_name}
-            onChange={this.handleInput}
-          />
-          Enter Description:
-          <input
-            type="text"
-            name="resource_description"
-            value={resource_description}
-            onChange={this.handleInput}
-          />
-          <input
-            type="button"
-            onClick={this.handleClickAddResource}
-            value="Add Resource"
-          />
-        </form>
+        <div>Please enter resources for {oneChild.first_name}.</div>
+        <Form>
+          <Form.Group widths="equal">
+            <Form.Input
+              label="Enter Link:"
+              type="text"
+              name="resource_link"
+              target="_blank"
+              value={resource_link}
+              onChange={this.handleInput}
+            />
+
+            <Form.Input
+              label="Enter Name:"
+              type="text"
+              name="resource_name"
+              value={resource_name}
+              onChange={this.handleInput}
+            />
+
+            <Form.Input
+              label="Enter Description:"
+              type="text"
+              name="resource_description"
+              value={resource_description}
+              onChange={this.handleInput}
+            />
+            <Button
+              inverted
+              color="purple"
+              type="button"
+              onClick={this.handleClickAddResource}
+              value="Add Resource"
+              content="Add Resource"
+            />
+          </Form.Group>
+        </Form>
         {message}
-        <div>
-          {allResources.map(obj => {
-            return (
-              <li>
-                <a href={obj.resource_link}>{obj.resource_link}</a>
-                Name: {obj.resource_name}
-                Description: {obj.resource_description}
-              </li>
-            );
-          })}
-        </div>
+        <Table celled padded>
+          <Table.Header>
+            <Table.Row>
+              <Table.HeaderCell>Link</Table.HeaderCell>
+              <Table.HeaderCell>Name</Table.HeaderCell>
+              <Table.HeaderCell>Description</Table.HeaderCell>
+            </Table.Row>
+          </Table.Header>
+          <Table.Body>
+            {allResources.map(obj => {
+              return (
+                <Table.Row>
+                  <Table.Cell>
+                    <a href={obj.resource_link}>{obj.resource_link}</a>
+                  </Table.Cell>
+                  <Table.Cell>{obj.resource_name}</Table.Cell>
+                  <Table.Cell>{obj.resource_description}</Table.Cell>
+                </Table.Row>
+              );
+            })}
+          </Table.Body>
+        </Table>
       </div>
     );
   }
