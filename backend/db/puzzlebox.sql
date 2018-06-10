@@ -84,7 +84,7 @@ INSERT INTO users_main_bio (username, first_name, last_name, relationship, pic, 
   VALUES ('prinsesa', 'Princess', 'Guerrero', 'mother', 'https://i.imgur.com/RzNb5m6b.jpg', 'check-out his profile');
 
 INSERT INTO user_child (admin_username, first_name, last_name, date_of_birth, age, pic, school, grade, class_size, diagnosis, likes, dislikes)
-  VALUES ('prinsesa', 'Philippe', 'Guerrero', 'July 21, 2010', '12', 'https://i.imgur.com/ntJaAMgb.jpg', 'P4Q@Skillman', '7th', '6-1-1', 'Autism', 'iPad, running', 'loud noises, fireworks');
+  VALUES ('prinsesa', 'Philippe', 'Guerrero', 'July 21', '12', 'https://i.imgur.com/ntJaAMgb.jpg', 'P4', '7th', '6-1-1', 'Autism', 'iPad, running', 'loud noises, fireworks');
 
 INSERT INTO authorized_users (auth_user_firstname, auth_user_lastname, email, relationship, admin_username, user_child_firstname, user_child_lastname)
   VALUES ('Joselito', 'Guerrero', 'jose@jose.com', 'father', 'prinsesa', 'Philippe', 'Guerrero');
