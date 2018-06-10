@@ -12,6 +12,7 @@ import ChildrenList from "./LoggedInUser/ChildrenList";
 import ChildPage from "./LoggedInUser/ChildPage";
 import MainUserProfile from "./LoggedInUser/MainUserProfile";
 import AddService from "./LoggedInUser/AddService";
+import Home from "./MainUser/Home";
 import "./Stylesheets/Login.css";
 import "./Stylesheets/Navbar.css";
 import "semantic-ui-css/semantic.min.css";
@@ -206,6 +207,7 @@ class App extends Component {
         </div>
         <div>
           <Switch>
+            <Route exact path="/" component={Home} />
             <Route exact path="/users" render={this.renderNewUser} />
             <Route exact path="/users/login" render={this.renderLogin} />
             <Route path="/users/logout" render={this.renderLogoutUser} />

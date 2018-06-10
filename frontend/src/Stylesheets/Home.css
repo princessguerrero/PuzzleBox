@@ -1,0 +1,47 @@
+.container {
+  position: relative;
+  text-align: center;
+  color: white;
+}
+
+.homeimage {
+  /* height: 100%; */
+  width: 100%;
+  z-index: -1;
+}
+
+.centered {
+  position: absolute;
+  top: 16%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.first-text {
+  font-size: 24px;
+  text-align: center;
+  width: 80%;
+  margin: 30px auto;
+  padding-left: 5px;
+}
+
+.second-text {
+  font-size: 24px;
+  text-align: center;
+  width: 80%;
+  margin: 20px auto;
+}
+
+.second-text a{
+    color: lightskyblue;
+}
+
+.second-text a:hover {
+    color: purple;
+}
+
+.puzzlebox-font{
+    font-size: 26px;
+    font-weight: bold;
+    font-family: "Love Ya Like A Sister", cursive;   
+}
