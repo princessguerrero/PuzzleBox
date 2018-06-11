@@ -3,7 +3,7 @@
 ## Introduction
 Welcome to PuzzleBox, where special needs caregivers get organized.
 ![picture](projpics/puzzleimage.png)
-#### fig.1 The homepage.
+##### fig.1 The homepage.
 
 ## Background
 Caring for a special needs child can be overwhelming.  Oftentimes I find myself scrambling to find a paperwork for a piece of information, searching my brain memory, or checking my phone for people and places that I need for my son.  So to get organized and have what I need for him in one place, I thought of building PuzzleBox.  Puzzle is currently being used as a symbol for Autism, and Box referring to the box of paperwork that I have.  
@@ -50,6 +50,7 @@ $ npm start
 ## How the App Works
 1.  Sign up as a New User
     ![picture](projpics/sign-inpage.png)
+    ##### fig.2 The Sign Up page.
      * Go to the sign up page and fill-out the necessary forms for the main user.  Once done you will automatically be logged in.
      * Next, click on the button that says Add a Child.  You will be directed to a form that you need to fill-out for the child.
      * Once you are done, you will be directed to a List of Children page (yes, you may add multiple children).  Click on a child's photo to view their profile.
