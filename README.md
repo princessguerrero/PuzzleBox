@@ -2,7 +2,7 @@
 
 ## Introduction
 Welcome to PuzzleBox, where special needs caregivers get organized.
-![picture](projpics/puzzleimage.jpg)
+![picture](projpics/puzzleimage.png)
 #### fig.1 The homepage.
 
 ## Background
