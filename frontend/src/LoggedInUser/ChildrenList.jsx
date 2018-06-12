@@ -49,11 +49,12 @@ class ChildrenList extends React.Component {
           <Link to="/users/childbio">Add a Child</Link>{" "}
         </Button>
         </div>
+        <div className="cardposition">
         {allChildren.map(child => {
           console.log("child id", child.id);
           return (
             <Link to={`/users/child/${child.id}/profile`}>
-              <Card>
+              <Card className="card-margin">
                 {child.pic ? (
                   <Image
                     src={child.pic}
@@ -72,6 +73,7 @@ class ChildrenList extends React.Component {
             </Link>
           );
         })}
+        </div>
       </div>
     );
   }

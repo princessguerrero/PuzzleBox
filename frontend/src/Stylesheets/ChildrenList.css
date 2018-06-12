@@ -32,3 +32,18 @@ button.ui.teal.inverted.button {
     justify-content: center;
     flex-direction: column;
 }
+
+.cardposition {
+    display: flex;
+    flex-wrap: wrap;
+    height: 100%;
+    margin-top: 20px;
+}
+
+.card-margin {
+    margin: 20px;
+}
+
+.ui.card.card-margin {
+    margin: 20px;
+}
