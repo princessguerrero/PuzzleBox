@@ -1,9 +1,9 @@
-DROP DATABASE IF EXISTS puzzlebox;
-CREATE DATABASE puzzlebox;
+-- DROP DATABASE IF EXISTS puzzlebox;
+-- CREATE DATABASE puzzlebox;
 
-\c puzzlebox;
+-- \c puzzlebox;
 
-DROP TABLE IF EXISTS users_main, users_main_bio, authorized_users, user_child, services, next_steps, resources;
+-- DROP TABLE IF EXISTS users_main, users_main_bio, authorized_users, user_child, services, next_steps, resources;
 
 CREATE TABLE users_main (
   id SERIAL PRIMARY KEY,
